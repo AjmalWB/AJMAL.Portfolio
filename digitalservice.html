@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Marketing — Ajmal</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="gallery.css"/>
+  <link href="images/logo.webp" rel="icon" />
+  <style>
+    /* Digital Marketing — data grid background */
+    .dm-grid-bg {
+      position:absolute; inset:0;
+      background-image: radial-gradient(circle, rgba(255,92,26,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse at 70% 50%, black 20%, transparent 70%);
+    }
+    /* Ticker numbers */
+    .ticker-row {
+      display:flex; gap:0; overflow:hidden;
+      border:1px solid var(--border); border-radius:12px;
+      background:var(--bg-card);
+    }
+    .ticker-item {
+      flex:1; padding:14px; text-align:center; border-right:1px solid var(--border);
+      transition:var(--transition);
+    }
+    .ticker-item:last-child { border-right:0; }
+    .ticker-item:hover { background:rgba(255,92,26,0.08); }
+    .ticker-num { font-family:var(--font-display); font-size:1.3rem; font-weight:800; color:var(--accent); }
+    .ticker-lbl { font-family:var(--font-mono); font-size:.62rem; color:var(--gray); text-transform:uppercase; letter-spacing:.06em; }
+    /* Channel cards */
+    .channel-card {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:20px;
+      padding:32px; height:100%; transition:var(--transition); position:relative; overflow:hidden;
+    }
+    .channel-card::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg, var(--accent), var(--accent2));
+      transform:scaleX(0); transform-origin:left; transition:transform 0.5s ease;
+    }
+    .channel-card:hover { border-color:rgba(255,92,26,0.35); transform:translateY(-5px); box-shadow:var(--glow); }
+    .channel-card:hover::after { transform:scaleX(1); }
+    .ch-icon { font-size:2rem; margin-bottom:16px; display:block; }
+    .ch-title { font-family:var(--font-display); font-size:1.15rem; font-weight:700; margin-bottom:8px; }
+    .ch-desc { font-size:.86rem; color:var(--gray); line-height:1.75; margin-bottom:14px; }
+    .ch-items { display:flex; flex-direction:column; gap:6px; }
+    .ch-item { display:flex; align-items:center; gap:8px; font-size:.82rem; color:var(--gray-light); }
+    .ch-item i { color:var(--accent); font-size:.7rem; }
+    /* ROI calculator mini-card */
+    .roi-card {
+      background: linear-gradient(135deg, rgba(255,92,26,0.15) 0%, rgba(255,140,66,0.08) 100%);
+      border:1px solid rgba(255,92,26,0.3); border-radius:20px;
+      padding:36px; text-align:center;
+    }
+    .roi-big { font-family:var(--font-display); font-size:4rem; font-weight:800; color:var(--accent); line-height:1; }
+    .roi-label { font-family:var(--font-mono); font-size:.78rem; color:var(--gray-light); text-transform:uppercase; letter-spacing:.1em; margin-top:6px; }
+    /* Platform badges */
+    .platform-grid { display:flex; gap:12px; flex-wrap:wrap; }
+    .platform-badge {
+      display:inline-flex; align-items:center; gap:10px;
+      background:var(--bg-card); border:1px solid var(--border); border-radius:12px;
+      padding:12px 18px; font-size:.85rem; font-family:var(--font-body); transition:var(--transition);
+    }
+    .platform-badge:hover { border-color:var(--accent); transform:translateY(-2px); }
+    .platform-badge-icon { font-size:1.3rem; }
+    /* Line chart SVG */
+    .chart-wrap { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:28px; overflow:hidden; position:relative; }
+    .chart-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; }
+    .chart-title { font-family:var(--font-display); font-size:.95rem; font-weight:700; }
+    .chart-up { font-family:var(--font-mono); font-size:.68rem; color:#22c55e; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2); padding:3px 8px; border-radius:50px; }
+    .chart-svg { width:100%; overflow:visible; }
+    /* Marquee */
+    .sp-marquee { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:16px 0; overflow:hidden; background:var(--bg-card); }
+    .sp-marquee-track { display:flex; gap:60px; animation:marqueeScroll 24s linear infinite; white-space:nowrap; }
+    .sp-marquee-track:hover { animation-play-state:paused; }
+    @keyframes marqueeScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    .sp-marquee-item { display:inline-flex; align-items:center; gap:12px; font-family:var(--font-display); font-size:.82rem; font-weight:600; color:var(--gray); text-transform:uppercase; letter-spacing:.1em; flex-shrink:0; }
+    .sp-marquee-dot { width:5px; height:5px; background:var(--accent); border-radius:50%; }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="sp-hero">
+  <div class="hero-bg-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="dm-grid-bg"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <a href="service.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+        <div class="sp-badge"><span class="sp-badge-dot"></span> Service — 04</div>
+        <h1 class="sp-hero-title">
+          <span class="line">Digital</span>
+          <span class="line accent" style="font-size: clamp(72px, 4.5vw, 90px);">Marketing</span>
+          <span class="line stroke">That Grows</span>
+        </h1>
+        <p class="sp-hero-desc">Data-driven campaigns across SEO, Google Ads, Meta Ads, and social media — engineered to grow your audience, leads, and revenue.</p>
+        <div class="sp-hero-actions">
+          <a href="contact.html" class="btn-primary-custom btn-magnetic">Grow My Business <i class="fas fa-arrow-right"></i></a>
+          <a href="works.html" class="btn-outline-custom">See Results <i class="fas fa-chart-line"></i></a>
+        </div>
+        <!-- Quick stats ticker -->
+        <div class="ticker-row mt-5" style="animation: fadeUp 1s 0.7s ease forwards; opacity:0;">
+          <div class="ticker-item">
+            <div class="ticker-num">3x</div>
+            <div class="ticker-lbl">Avg ROAS</div>
+          </div>
+          <div class="ticker-item">
+            <div class="ticker-num">200%</div>
+            <div class="ticker-lbl">Traffic Boost</div>
+          </div>
+          <div class="ticker-item">
+            <div class="ticker-num">50+</div>
+            <div class="ticker-lbl">Campaigns Run</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="dm-hero-dashboard parallax-target">
+          <div class="dm-dash-card">
+            <div class="dm-dash-header">
+              <div class="dm-dash-title">Campaign Performance</div>
+              <div class="dm-live-dot">Live</div>
+            </div>
+            <!-- Bar chart -->
+            <div class="dm-bar-chart">
+              <div class="dm-bar b1"></div>
+              <div class="dm-bar b2"></div>
+              <div class="dm-bar b3"></div>
+              <div class="dm-bar b4 active"></div>
+              <div class="dm-bar b5"></div>
+              <div class="dm-bar b6 active"></div>
+              <div class="dm-bar b7"></div>
+              <div class="dm-bar b8"></div>
+              <div class="dm-bar b9"></div>
+            </div>
+            <div class="dm-metric-row">
+              <div class="dm-metric">
+                <div class="dm-metric-num">3.2x</div>
+                <div class="dm-metric-up">↑ 24%</div>
+                <div class="dm-metric-label">ROAS</div>
+              </div>
+              <div class="dm-metric">
+                <div class="dm-metric-num">12k</div>
+                <div class="dm-metric-up">↑ 48%</div>
+                <div class="dm-metric-label">Clicks</div>
+              </div>
+              <div class="dm-metric">
+                <div class="dm-metric-num">₹4.2</div>
+                <div class="dm-metric-up">↓ 18%</div>
+                <div class="dm-metric-label">CPC</div>
+              </div>
+            </div>
+          </div>
+          <!-- Float cards -->
+          <div class="dm-float df1">
+            <div class="df-num">+200%</div>
+            <div class="df-label">Organic Traffic</div>
+          </div>
+          <div class="dm-float df2">
+            <div class="df-num">#1</div>
+            <div class="df-label">Google Ranking</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="sp-marquee">
+  <div class="sp-marquee-track">
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> SEO</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Google Ads</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Meta Ads</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Social Media</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Email Marketing</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Content Strategy</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Analytics</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Lead Generation</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> SEO</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Google Ads</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Meta Ads</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Social Media</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Email Marketing</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Content Strategy</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Analytics</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Lead Generation</span>
+  </div>
+</div>
+
+<!-- CHANNELS -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Channels</div>
+        <h2 class="section-title">Full-Funnel <span class="accent">Coverage</span></h2>
+        <p class="section-subtitle">Multi-channel strategies that reach your audience at every stage — awareness to conversion.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal delay-1">
+        <div class="channel-card">
+          <span class="ch-icon">🔍</span>
+          <div class="ch-title">SEO</div>
+          <div class="ch-desc">Rank higher, get found first — organic traffic that compounds over time.</div>
+          <div class="ch-items">
+            <div class="ch-item"><i class="fas fa-check-circle"></i> On-page optimisation</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Technical SEO audit</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Content strategy</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Link building</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal delay-2">
+        <div class="channel-card">
+          <span class="ch-icon">📢</span>
+          <div class="ch-title">Google Ads</div>
+          <div class="ch-desc">Search, display, and shopping campaigns with maximum ROI focus.</div>
+          <div class="ch-items">
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Campaign setup</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Keyword research</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Ad copywriting</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Bid optimisation</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal delay-3">
+        <div class="channel-card">
+          <span class="ch-icon">📱</span>
+          <div class="ch-title">Meta / Social Ads</div>
+          <div class="ch-desc">Facebook and Instagram campaigns with precise audience targeting.</div>
+          <div class="ch-items">
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Audience targeting</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Creative design</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> A/B testing</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Retargeting</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal delay-4">
+        <div class="channel-card">
+          <span class="ch-icon">📧</span>
+          <div class="ch-title">Email Marketing</div>
+          <div class="ch-desc">Automated flows and campaigns that nurture leads and drive repeat purchases.</div>
+          <div class="ch-items">
+            <div class="ch-item"><i class="fas fa-check-circle"></i> List building</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Automation flows</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Template design</div>
+            <div class="ch-item"><i class="fas fa-check-circle"></i> Open rate optimisation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS + CHART -->
+<section class="section" style="background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 reveal-left">
+        <div class="section-tag">Proven Results</div>
+        <h2 class="section-title mb-5">Real Numbers, <span class="accent">Real Growth</span></h2>
+        <div class="row g-4">
+          <div class="col-6">
+            <div class="dm-stat-card">
+              <div class="dm-sc-icon">📈</div>
+              <div class="dm-sc-num"><span class="count-num" data-target="200" data-suffix="%">0%</span></div>
+              <div class="dm-sc-change up">↑ Avg Traffic Growth</div>
+              <div class="dm-sc-title">Organic Traffic</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="dm-stat-card">
+              <div class="dm-sc-icon">💰</div>
+              <div class="dm-sc-num"><span class="count-num" data-target="3" data-suffix="x">0x</span></div>
+              <div class="dm-sc-change up">↑ Return on Ad Spend</div>
+              <div class="dm-sc-title">Avg ROAS</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="dm-stat-card">
+              <div class="dm-sc-icon">👤</div>
+              <div class="dm-sc-num"><span class="count-num" data-target="45" data-suffix="%">0%</span></div>
+              <div class="dm-sc-change up">↑ Avg Lead Volume</div>
+              <div class="dm-sc-title">Lead Generation</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="dm-stat-card">
+              <div class="dm-sc-icon">⭐</div>
+              <div class="dm-sc-num"><span class="count-num" data-target="50" data-suffix="+">0+</span></div>
+              <div class="dm-sc-change up">✓ Satisfied Clients</div>
+              <div class="dm-sc-title">Campaigns Done</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal-right delay-2">
+        <div class="chart-wrap">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Traffic Growth — 12 Month Trend</div>
+              <div style="font-size:.78rem; color:var(--gray); margin-top:4px; font-family:var(--font-mono);">Sample Campaign Performance</div>
+            </div>
+            <div class="chart-up">↑ 200%</div>
+          </div>
+          <svg class="chart-svg" viewBox="0 0 400 140" preserveAspectRatio="none" height="140">
+            <!-- Grid lines -->
+            <line x1="0" y1="35" x2="400" y2="35" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="0" y1="70" x2="400" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="0" y1="105" x2="400" y2="105" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <!-- Area fill -->
+            <path d="M0,130 L0,120 C33,115 66,110 100,100 C133,90 166,78 200,65 C233,52 266,38 300,28 C333,18 366,14 400,10 L400,130 Z"
+                  fill="rgba(255,92,26,0.12)"/>
+            <!-- Line -->
+            <path class="sparkline-path" d="M0,120 C33,115 66,110 100,100 C133,90 166,78 200,65 C233,52 266,38 300,28 C333,18 366,14 400,10"
+                  fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Dots -->
+            <circle cx="0" cy="120" r="3" fill="var(--accent)"/>
+            <circle cx="100" cy="100" r="3" fill="var(--accent)"/>
+            <circle cx="200" cy="65" r="3" fill="var(--accent)"/>
+            <circle cx="300" cy="28" r="4" fill="var(--accent)" filter="drop-shadow(0 0 6px rgba(255,92,26,0.8))"/>
+            <circle cx="400" cy="10" r="4" fill="var(--accent)" filter="drop-shadow(0 0 8px rgba(255,92,26,1))"/>
+          </svg>
+          <div style="display:flex; justify-content:space-between; margin-top:8px; font-family:var(--font-mono); font-size:.62rem; color:var(--gray);">
+            <span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span><span>Dec</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES BREAKDOWN -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Services</div>
+        <h2 class="section-title">What's <span class="accent">Included</span></h2>
+      </div>
+    </div>
+    <div class="col-lg-10 mx-auto">
+      <div class="dm-service-row reveal delay-1">
+        <div class="dm-sr-icon">🎯</div>
+        <div>
+          <div class="dm-sr-title">Strategy &amp; Audit</div>
+          <div class="dm-sr-desc">Full digital audit of your existing channels. Custom marketing roadmap with priority actions and KPIs.</div>
+          <div class="dm-sr-tag">Foundation</div>
+        </div>
+      </div>
+      <div class="dm-service-row reveal delay-2">
+        <div class="dm-sr-icon">🔍</div>
+        <div>
+          <div class="dm-sr-title">SEO &amp; Content</div>
+          <div class="dm-sr-desc">Keyword research, technical SEO, on-page optimisation, content calendar, blog writing, and link outreach.</div>
+          <div class="dm-sr-tag">Organic Growth</div>
+        </div>
+      </div>
+      <div class="dm-service-row reveal delay-3">
+        <div class="dm-sr-icon">💰</div>
+        <div>
+          <div class="dm-sr-title">Paid Advertising</div>
+          <div class="dm-sr-desc">Google Search/Display/Shopping + Meta ads. Full campaign management, creatives, A/B tests, and ROI reporting.</div>
+          <div class="dm-sr-tag">Paid Growth</div>
+        </div>
+      </div>
+      <div class="dm-service-row reveal delay-4">
+        <div class="dm-sr-icon">📊</div>
+        <div>
+          <div class="dm-sr-title">Analytics &amp; Reporting</div>
+          <div class="dm-sr-desc">Monthly performance reports with clear insights, what's working, what needs adjustment, and next month's plan.</div>
+          <div class="dm-sr-tag">Data-Driven</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORMS -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row mb-4"><div class="col reveal"><div class="section-tag">Platforms</div><h2 class="section-title">Tools &amp; <span class="accent">Platforms</span></h2></div></div>
+    <div class="platform-grid reveal delay-1">
+      <div class="platform-badge"><span class="platform-badge-icon">🔍</span> Google Ads</div>
+      <div class="platform-badge"><span class="platform-badge-icon">📘</span> Meta Ads</div>
+      <div class="platform-badge"><span class="platform-badge-icon">📊</span> Google Analytics 4</div>
+      <div class="platform-badge"><span class="platform-badge-icon">🔎</span> SEMrush</div>
+      <div class="platform-badge"><span class="platform-badge-icon">📈</span> Ahrefs</div>
+      <div class="platform-badge"><span class="platform-badge-icon">📧</span> Mailchimp</div>
+      <div class="platform-badge"><span class="platform-badge-icon">🐦</span> Hootsuite</div>
+      <div class="platform-badge"><span class="platform-badge-icon">🔥</span> Hotjar</div>
+      <div class="platform-badge"><span class="platform-badge-icon">📌</span> Google Search Console</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="section-tag justify-content-center mb-4">FAQ</div>
+        <h2 class="section-title text-center mb-5">Marketing <span class="accent">Questions</span></h2>
+        <div class="faq-item reveal">
+          <div class="faq-q">How quickly will I see results? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">Paid ads (Google/Meta) typically show results within 2–4 weeks. SEO is a longer-term investment — you'll see meaningful traction in 3–6 months, with compounding growth beyond that.</div>
+        </div>
+        <div class="faq-item reveal delay-1">
+          <div class="faq-q">What's your minimum monthly budget for ads? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">I recommend a minimum ad spend of ₹15,000–₹30,000/month for Google Ads and ₹10,000–₹20,000/month for Meta Ads to generate meaningful data and results. Management fees are separate.</div>
+        </div>
+        <div class="faq-item reveal delay-2">
+          <div class="faq-q">Do you manage social media content too? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">Yes. Social media management packages include content planning, copywriting, graphic design, scheduling, and community management across Instagram, Facebook, and LinkedIn.</div>
+        </div>
+        <div class="faq-item reveal delay-3">
+          <div class="faq-q">How do you measure success? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">We agree on KPIs upfront — traffic, leads, ROAS, or revenue — and I provide monthly reports with clear metrics, insights, and recommended actions for continuous improvement.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="container reveal">
+    <div class="section-tag justify-content-center">Start Growing</div>
+    <h2 class="section-title mb-4">Ready to Scale Your <span class="accent">Business Online?</span></h2>
+    <p style="color:var(--gray-light); max-width:420px; margin:0 auto 32px; font-size:.95rem;">Let's build a marketing engine that brings in leads and revenue — predictably.</p>
+    <a href="contact.html" class="btn-primary-custom btn-magnetic" style="font-size:1rem; padding:16px 40px;">Book a Free Strategy Call <i class="fas fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="works.html" class="footer-link">Works</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Let's Work Together</div>
+        <p style="font-size:.9rem; color:var(--gray); margin-bottom:16px;">Let's grow your business online.</p>
+        <a href="contact.html" class="btn-primary-custom" style="display:inline-flex; font-size:.85rem; padding:12px 24px;">Contact Me <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Ajmal. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script src="gallery.js"></script>
+</body>
+</html>

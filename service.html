@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services – Ajmal Portfolio</title>
+  <link href="images/logo.webp" rel="icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .process-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+    }
+    .process-step::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(at top left, rgba(255,92,26,0.08), transparent 60%);
+      opacity: 0; transition: var(--transition);
+    }
+    .process-step:hover { border-color: rgba(255,92,26,0.35); transform: translateY(-5px); }
+    .process-step:hover::before { opacity: 1; }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 800;
+      color: rgba(255,92,26,0.15);
+      line-height: 1;
+      position: absolute; top: 20px; right: 24px;
+    }
+    .step-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+    .step-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .faq-item:hover { border-color: rgba(255,92,26,0.35); }
+    .faq-question {
+      padding: 20px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .faq-icon { color: var(--accent); font-size: 0.85rem; transition: var(--transition); }
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-size: 0.9rem; color: var(--gray);
+      display: none;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 140px 0 60px; position: relative; overflow: hidden;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Services</div>
+    <h1 class="hero-title" style="font-size: clamp(3rem,7vw,6rem);">
+      <span class="line">Design Solutions</span>
+      <span class="line accent">That Elevate</span>
+      <span class="line stroke">Your Brand</span>
+    </h1>
+    <p style="color:var(--gray-light); font-size:1.1rem; max-width:520px; margin-top:20px; animation: fadeInUp 1s 0.4s ease forwards; opacity:0;">
+      From strategy to execution — tailored services that help brands stand out, connect, and grow.
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6 reveal delay-1">
+        <div class="service-card tilt-card" style="padding: 50px 44px;">
+          <span class="service-num">01</span>
+          <div class="service-icon" style="width:64px; height:64px; font-size:1.8rem;">🎨</div>
+          <div class="service-name" style="font-size:1.5rem; margin-bottom:18px;">UI/UX Design</div>
+          <div class="service-desc" style="font-size:.95rem;">
+            User-centered design that's both beautiful and functional. I conduct research, build wireframes, create high-fidelity prototypes, and deliver polished UI systems — all in Figma.
+          </div>
+          <div class="mt-4">
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> UX Research &amp; Audit</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Wireframing &amp; Prototyping</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> High-Fidelity UI Design</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light);"><i class="fas fa-check" style="color:var(--accent)"></i> Design System &amp; Handoff</div>
+          </div>
+          <div class="service-arrow">Get Started <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="col-md-6 reveal delay-2">
+        <div class="service-card tilt-card" style="padding: 50px 44px;">
+          <span class="service-num">02</span>
+          <div class="service-icon" style="width:64px; height:64px; font-size:1.8rem;">💻</div>
+          <div class="service-name" style="font-size:1.5rem; margin-bottom:18px;">Web Design</div>
+          <div class="service-desc" style="font-size:.95rem;">
+            Visually stunning, responsive websites built on Webflow, WordPress, or custom HTML/CSS — optimized for speed, SEO, and conversions.
+          </div>
+          <div class="mt-4">
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Landing Pages &amp; Websites</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Webflow / WordPress</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Responsive &amp; Mobile-First</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light);"><i class="fas fa-check" style="color:var(--accent)"></i> Speed &amp; SEO Optimization</div>
+          </div>
+          <div class="service-arrow">Get Started <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="col-md-6 reveal delay-1">
+        <div class="service-card tilt-card" style="padding: 50px 44px;">
+          <span class="service-num">03</span>
+          <div class="service-icon" style="width:64px; height:64px; font-size:1.8rem;">✦</div>
+          <div class="service-name" style="font-size:1.5rem; margin-bottom:18px;">Graphic Design</div>
+          <div class="service-desc" style="font-size:.95rem;">
+            From logos to full brand systems — I create compelling visuals that communicate your values and connect with your audience.
+          </div>
+          <div class="mt-4">
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Logo &amp; Brand Identity</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Social Media Creatives</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Print &amp; Packaging</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light);"><i class="fas fa-check" style="color:var(--accent)"></i> Brand Guidelines</div>
+          </div>
+          <div class="service-arrow">Get Started <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="col-md-6 reveal delay-2">
+        <div class="service-card tilt-card" style="padding: 50px 44px;">
+          <span class="service-num">04</span>
+          <div class="service-icon" style="width:64px; height:64px; font-size:1.8rem;">📈</div>
+          <div class="service-name" style="font-size:1.5rem; margin-bottom:18px;">Digital Marketing</div>
+          <div class="service-desc" style="font-size:.95rem;">
+            Data-driven strategies that grow your audience and revenue — from SEO and content to paid ads and social media management.
+          </div>
+          <div class="mt-4">
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> SEO &amp; Content Strategy</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Google &amp; Meta Ads</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light); margin-bottom:10px;"><i class="fas fa-check" style="color:var(--accent)"></i> Social Media Management</div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:.85rem; color:var(--gray-light);"><i class="fas fa-check" style="color:var(--accent)"></i> Email Marketing</div>
+          </div>
+          <div class="service-arrow">Get Started <i class="fas fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" style="background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">How I Work</div>
+        <h2 class="section-title">My Creative <span class="accent">Process</span></h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal delay-1">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="service-icon mb-3">🔍</div>
+          <div class="step-title">Discovery</div>
+          <div class="step-desc">Understanding your goals, audience, and competition to build a solid strategic foundation.</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal delay-2">
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="service-icon mb-3">✏️</div>
+          <div class="step-title">Design</div>
+          <div class="step-desc">Crafting wireframes, concepts, and high-fidelity designs with clear visual direction.</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal delay-3">
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="service-icon mb-3">⚡</div>
+          <div class="step-title">Build</div>
+          <div class="step-desc">Bringing designs to life — from Webflow/WordPress development to marketing campaign setup.</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal delay-4">
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="service-icon mb-3">🚀</div>
+          <div class="step-title">Launch &amp; Grow</div>
+          <div class="step-desc">Testing, launching, and continually optimizing for performance and results.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5 text-center">
+      <div class="col reveal">
+        <div class="section-tag justify-content-center">Pricing</div>
+        <h2 class="section-title">Simple Packages for <span class="accent">Every Stage</span></h2>
+        <p class="section-subtitle mx-auto text-center" style="max-width:460px;">Clear, flexible packages built to fit your brand's stage.</p>
+      </div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-4 reveal delay-1">
+        <div class="pricing-card h-100">
+          <div class="pricing-plan">Starter</div>
+          <div class="price-num">$200</div>
+          <div class="price-label">/ project</div>
+          <p class="pricing-desc" style="color:var(--gray); font-size:.88rem; margin-bottom:0;">Perfect for early-stage brands.</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Logo Design</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Brand Colors &amp; Typography</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> 1-Page Landing Site</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Social Media Kit</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> 2 Revision Rounds</div>
+          <div class="mt-5">
+            <a href="contact.html" class="btn-outline-custom w-100 justify-content-center">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-2">
+        <div class="pricing-card featured h-100">
+          <div class="pricing-badge">Popular</div>
+          <div class="pricing-plan">Pro Plan</div>
+          <div class="price-num">$340</div>
+          <div class="price-label" style="color:rgba(255,255,255,.7);">/ project</div>
+          <p class="pricing-desc" style="color:rgba(255,255,255,.75); font-size:.88rem; margin-bottom:0;">For businesses ready to elevate their brand.</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Everything in Starter</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Full Brand Identity</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> 5-Page Website</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> UI/UX Design (Mobile)</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Unlimited Revisions</div>
+          <div class="mt-5">
+            <a href="contact.html" class="btn-outline-custom w-100 justify-content-center" style="border-color:rgba(255,255,255,.4); color:var(--white);">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-3">
+        <div class="pricing-card h-100">
+          <div class="pricing-plan">Enterprise</div>
+          <div class="price-num">$230</div>
+          <div class="price-label">/ project</div>
+          <p class="pricing-desc" style="color:var(--gray); font-size:.88rem; margin-bottom:0;">Complete branding &amp; marketing solution.</p>
+          <div class="pricing-divider"></div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Everything in Pro</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Digital Marketing Strategy</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> SEO &amp; Ad Campaigns</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> Monthly Analytics Report</div>
+          <div class="pricing-feat"><div class="pricing-feat-icon">✓</div> 3 Months Support</div>
+          <div class="mt-5">
+            <a href="contact.html" class="btn-outline-custom w-100 justify-content-center">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title">Common <span class="accent">Questions</span></h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="faq-item reveal delay-1">
+          <div class="faq-question">How long does a project typically take? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-answer">Timelines vary by scope. A landing page takes 1–2 weeks, a full brand identity 2–4 weeks, and a complete website + marketing campaign 4–8 weeks. We'll discuss timelines during our initial call.</div>
+        </div>
+        <div class="faq-item reveal delay-2">
+          <div class="faq-question">Do you work with international clients? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-answer">Yes! I work with clients worldwide. Communication is primarily via email, Slack, or Zoom — whatever works best for you.</div>
+        </div>
+        <div class="faq-item reveal delay-3">
+          <div class="faq-question">What tools do you use? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-answer">I primarily use Figma for UI/UX and web design, the Adobe Suite (Illustrator, Photoshop) for graphics, Webflow/WordPress for development, and tools like SEMrush, Google Analytics, and Meta Ads Manager for marketing.</div>
+        </div>
+        <div class="faq-item reveal delay-4">
+          <div class="faq-question">Do you offer ongoing support? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-answer">Yes! All packages include a post-delivery support period. For ongoing needs, I also offer monthly retainer plans. Get in touch to discuss your specific requirements.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="resume.html" class="footer-link">Resume</a>
+        <a href="works.html" class="footer-link">Works</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Get In Touch</div>
+        <p style="font-size:.9rem; color: var(--gray); margin-bottom:16px;">Ready to start a project?</p>
+        <a href="contact.html" class="btn-primary-custom" style="display:inline-flex; font-size:.85rem; padding:12px 24px;">Contact Me <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Ajmal. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    item.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

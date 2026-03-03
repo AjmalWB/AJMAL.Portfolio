@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Graphic Design — Ajmal</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="gallery.css"/>
+  <link href="images/logo.webp" rel="icon" />
+  <style>
+    /* Graphic Design — paintbrush cursor trail */
+    .sp-hero { background:var(--bg-dark); }
+    .sp-hero::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    /* Typography showcase */
+    .typo-showcase {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:20px;
+      padding:40px; overflow:hidden; position:relative;
+    }
+    .typo-showcase::before {
+      content:''; position:absolute; top:-60px; right:-60px;
+      width:180px; height:180px; border-radius:50%;
+      background:radial-gradient(circle, rgba(255,92,26,0.2), transparent 70%);
+    }
+    .typo-size-xl { font-family:var(--font-display); font-size:4rem; font-weight:800; line-height:1; color:var(--white); }
+    .typo-size-lg { font-family:var(--font-display); font-size:2rem; font-weight:700; color:var(--gray-light); }
+    .typo-size-md { font-family:var(--font-body); font-size:1rem; color:var(--gray); margin-top:8px; }
+    .typo-divider { height:1px; background:var(--border); margin:20px 0; }
+    .color-grid { display:flex; gap:0; border-radius:12px; overflow:hidden; height:50px; margin-top:16px; }
+    .color-swatch-big { flex:1; transition:flex 0.4s ease; cursor:pointer; }
+    .color-swatch-big:hover { flex:2; }
+    /* Brand cards (logo mockups) */
+    .brand-card {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:20px;
+      padding:36px 28px; transition:var(--transition); position:relative; overflow:hidden; height:100%;
+    }
+    .brand-card:hover { border-color:rgba(255,92,26,0.4); transform:translateY(-6px); box-shadow:var(--glow); }
+    .bc-logo-area {
+      width:100%; aspect-ratio:16/9; background:var(--bg-dark); border-radius:12px;
+      display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+      font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--accent);
+      letter-spacing:-0.04em; position:relative; overflow:hidden;
+    }
+    .bc-logo-area::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse at 30% 50%, rgba(255,92,26,0.15), transparent 60%);
+    }
+    .bc-type { font-family:var(--font-mono); font-size:0.7rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em; margin-bottom:6px; }
+    .bc-name { font-family:var(--font-display); font-size:1.1rem; font-weight:700; }
+    .bc-tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+    .bc-tag { background:rgba(255,255,255,0.04); border:1px solid var(--border); color:var(--gray); font-size:.68rem; padding:2px 10px; border-radius:50px; font-family:var(--font-mono); }
+    /* Animated headline letter-by-letter */
+    .letter-anim span {
+      display:inline-block; opacity:0; transform:translateY(20px);
+      animation:letterDrop 0.5s cubic-bezier(0.23,1,0.32,1) forwards;
+    }
+    @keyframes letterDrop { to { opacity:1; transform:translateY(0); } }
+    /* Capability pills with icons */
+    .cap-list { display:flex; flex-direction:column; gap:12px; }
+    .cap-item {
+      display:flex; align-items:center; gap:16px; padding:18px 22px;
+      background:var(--bg-card); border:1px solid var(--border); border-radius:14px;
+      transition:var(--transition);
+    }
+    .cap-item:hover { border-color:rgba(255,92,26,0.4); transform:translateX(6px); }
+    .cap-icon { font-size:1.4rem; flex-shrink:0; }
+    .cap-title { font-family:var(--font-display); font-weight:700; font-size:.95rem; }
+    .cap-sub { font-size:.8rem; color:var(--gray); }
+    .sp-marquee { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:16px 0; overflow:hidden; background:var(--bg-card); }
+    .sp-marquee-track { display:flex; gap:60px; animation:marqueeScroll 16s linear infinite; white-space:nowrap; }
+    .sp-marquee-track:hover { animation-play-state:paused; }
+    @keyframes marqueeScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    .sp-marquee-item { display:inline-flex; align-items:center; gap:12px; font-family:var(--font-display); font-size:.82rem; font-weight:600; color:var(--gray); text-transform:uppercase; letter-spacing:.1em; flex-shrink:0; }
+    .sp-marquee-dot { width:5px; height:5px; background:var(--accent); border-radius:50%; }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="sp-hero">
+  <div class="hero-bg-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <a href="service.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+        <div class="sp-badge"><span class="sp-badge-dot"></span> Service — 03</div>
+        <h1 class="sp-hero-title">
+          <span class="line" style="font-size: clamp(85px, 4.5vw, 90px);">Graphic</span>
+          <span class="line accent">Design</span>
+          <span class="line stroke" style="font-size: clamp(75px, 4.5vw, 90px);">That Speaks</span>
+        </h1>
+        <p class="sp-hero-desc">Compelling visual identities — logos, brand systems, print, packaging, and digital assets — crafted to make your brand unforgettable.</p>
+        <div class="sp-hero-actions">
+          <a href="contact.html" class="btn-primary-custom btn-magnetic">Get a Quote <i class="fas fa-arrow-right"></i></a>
+          <a href="works.html" class="btn-outline-custom">View Work <i class="fas fa-eye"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="gd-hero-canvas parallax-target">
+          <div class="gd-ring"></div>
+          <div class="gd-ring2"></div>
+          <!-- Orbit nodes -->
+          <div class="gd-orbit-node n1">Logo Design</div>
+          <div class="gd-orbit-node n2">Brand Identity</div>
+          <div class="gd-orbit-node n3">Print &amp; Digital</div>
+          <!-- Center card -->
+          <div class="gd-center-card">
+            <div class="uf-label" style="margin-bottom:14px;">Colour Palette</div>
+            <div class="gd-color-swatches">
+              <div class="gd-swatch s1"></div>
+              <div class="gd-swatch s2"></div>
+              <div class="gd-swatch s3"></div>
+              <div class="gd-swatch s4"></div>
+              <div class="gd-swatch s5"></div>
+              <div class="gd-swatch s6"></div>
+            </div>
+            <div class="typo-divider" style="margin:16px 0;"></div>
+            <div class="gd-font-preview accent">Aa Bb Cc</div>
+            <div class="gd-font-label">Syne Display — Primary Typeface</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="sp-marquee">
+  <div class="sp-marquee-track">
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Logo Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Brand Identity</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Illustrator</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Photoshop</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Packaging</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Print Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Social Media</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Typography</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Logo Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Brand Identity</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Illustrator</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Photoshop</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Packaging</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Print Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Social Media</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Typography</span>
+  </div>
+</div>
+
+<!-- CAPABILITIES -->
+<section class="section">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6 reveal-left">
+        <div class="section-tag">Capabilities</div>
+        <h2 class="section-title mb-4">Every Visual <span class="accent">Touchpoint</span></h2>
+        <div class="cap-list">
+          <div class="cap-item">
+            <div class="cap-icon">✒️</div>
+            <div><div class="cap-title">Logo &amp; Brand Identity</div><div class="cap-sub">Logos, brand marks, wordmarks, brand guidelines</div></div>
+          </div>
+          <div class="cap-item">
+            <div class="cap-icon">📦</div>
+            <div><div class="cap-title">Packaging Design</div><div class="cap-sub">Product packaging, labels, box design, mockups</div></div>
+          </div>
+          <div class="cap-item">
+            <div class="cap-icon">📱</div>
+            <div><div class="cap-title">Social Media Creatives</div><div class="cap-sub">Posts, stories, ad creatives, templates — all platforms</div></div>
+          </div>
+          <div class="cap-item">
+            <div class="cap-icon">🖨️</div>
+            <div><div class="cap-title">Print Design</div><div class="cap-sub">Brochures, business cards, posters, banners, catalogues</div></div>
+          </div>
+          <div class="cap-item">
+            <div class="cap-icon">📚</div>
+            <div><div class="cap-title">Brand Guidelines</div><div class="cap-sub">Complete brand book: rules, usage, do's &amp; don'ts</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal-right delay-2">
+        <div class="typo-showcase mb-4">
+          <div class="uf-label mb-3">Typography System</div>
+          <div class="typo-size-xl accent">Display</div>
+          <div class="typo-size-lg">Heading Level</div>
+          <div class="typo-size-md">Body text for readability and flow. Clean, purposeful, and always on-brand across every medium.</div>
+          <div class="typo-divider"></div>
+          <div class="uf-label mb-2">Brand Palette</div>
+          <div class="color-grid">
+            <div class="color-swatch-big" style="background:#ff5c1a;"></div>
+            <div class="color-swatch-big" style="background:#ff8c42;"></div>
+            <div class="color-swatch-big" style="background:#1a1a1a;"></div>
+            <div class="color-swatch-big" style="background:#ffffff;"></div>
+            <div class="color-swatch-big" style="background:#6c63ff;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STYLE SHOWCASE -->
+<section class="section" style="background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Design Styles</div>
+        <h2 class="section-title">A Style for Every <span class="accent">Brand</span></h2>
+        <p class="section-subtitle">I adapt to your brand's voice — not the other way around.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal delay-1">
+        <div class="gd-style-card">
+          <span class="gds-emoji">🔴</span>
+          <div class="gds-title">Bold &amp; Modern</div>
+          <div class="gds-desc">Strong typography, high-contrast colours, geometric forms. Unforgettable first impressions.</div>
+          <div class="gds-tools"><span class="gds-tool">Illustrator</span><span class="gds-tool">Figma</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal delay-2">
+        <div class="gd-style-card">
+          <span class="gds-emoji">🤍</span>
+          <div class="gds-title">Clean &amp; Minimal</div>
+          <div class="gds-desc">Lots of whitespace, refined details, quiet confidence. Premium and timeless.</div>
+          <div class="gds-tools"><span class="gds-tool">Figma</span><span class="gds-tool">InDesign</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal delay-3">
+        <div class="gd-style-card">
+          <span class="gds-emoji">🌿</span>
+          <div class="gds-title">Organic &amp; Natural</div>
+          <div class="gds-desc">Warm textures, earthy tones, hand-drawn elements. Authentic and approachable.</div>
+          <div class="gds-tools"><span class="gds-tool">Photoshop</span><span class="gds-tool">Procreate</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal delay-4">
+        <div class="gd-style-card">
+          <span class="gds-emoji">🌈</span>
+          <div class="gds-title">Vibrant &amp; Playful</div>
+          <div class="gds-desc">Bold gradients, expressive illustrations, youthful energy. Brands that pop.</div>
+          <div class="gds-tools"><span class="gds-tool">Illustrator</span><span class="gds-tool">Photoshop</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK SAMPLES (brand mockups) -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5 align-items-end">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Recent Work</div>
+        <h2 class="section-title">Brand <span class="accent">Highlights</span></h2>
+      </div>
+      <div class="col-lg-6 text-lg-end reveal delay-2">
+        <a href="works.html" class="btn-outline-custom">All Projects <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal delay-1">
+        <div class="brand-card">
+          <div class="bc-logo-area">APEX<span style="color:var(--white);">.</span></div>
+          <div class="bc-type">Brand Identity</div>
+          <div class="bc-name">Apex Wellness Co.</div>
+          <div class="bc-tags"><span class="bc-tag">Logo</span><span class="bc-tag">Brand Book</span><span class="bc-tag">Packaging</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-2">
+        <div class="brand-card">
+          <div class="bc-logo-area" style="font-size:1.8rem; color:var(--white);">NOVA <span style="color:var(--accent);">✦</span></div>
+          <div class="bc-type">Visual Identity</div>
+          <div class="bc-name">Nova Creative Agency</div>
+          <div class="bc-tags"><span class="bc-tag">Logo</span><span class="bc-tag">Stationery</span><span class="bc-tag">Social</span></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-3">
+        <div class="brand-card">
+          <div class="bc-logo-area" style="color:var(--white); letter-spacing:.2em; font-size:1.4rem;">KIN<span style="color:var(--accent);">●</span></div>
+          <div class="bc-type">Packaging + Brand</div>
+          <div class="bc-name">Kin Coffee Studio</div>
+          <div class="bc-tags"><span class="bc-tag">Packaging</span><span class="bc-tag">Labels</span><span class="bc-tag">Print</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="section-tag justify-content-center mb-4">FAQ</div>
+        <h2 class="section-title text-center mb-5">Graphic Design <span class="accent">Questions</span></h2>
+        <div class="faq-item reveal">
+          <div class="faq-q">Do I own the final logo and brand files? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">Yes, absolutely. Upon final payment, you receive full ownership of all files including the editable source files (AI, EPS, SVG, PDF) plus PNG/JPG exports in all sizes.</div>
+        </div>
+        <div class="faq-item reveal delay-1">
+          <div class="faq-q">What formats do you deliver? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">I deliver vector files (AI, EPS, SVG), print-ready PDFs, and raster files (PNG transparent background, JPG) in multiple resolutions — suitable for web, print, and social media.</div>
+        </div>
+        <div class="faq-item reveal delay-2">
+          <div class="faq-q">Can you redesign my existing logo? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">Yes. Whether it's a full rebrand or a subtle refresh, I can modernise your visual identity while preserving the brand equity you've built.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="container reveal">
+    <div class="section-tag justify-content-center">Let's Create</div>
+    <h2 class="section-title mb-4">Ready to Build a Brand That <span class="accent">Stands Out?</span></h2>
+    <p style="color:var(--gray-light); max-width:420px; margin:0 auto 32px; font-size:.95rem;">Great design is the difference between being remembered and being forgotten.</p>
+    <a href="contact.html" class="btn-primary-custom btn-magnetic" style="font-size:1rem; padding:16px 40px;">Start Branding <i class="fas fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="works.html" class="footer-link">Works</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Let's Work Together</div>
+        <p style="font-size:.9rem; color:var(--gray); margin-bottom:16px;">Your brand deserves to look exceptional.</p>
+        <a href="contact.html" class="btn-primary-custom" style="display:inline-flex; font-size:.85rem; padding:12px 24px;">Contact Me <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Ajmal. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script src="gallery.js"></script>
+</body>
+</html>

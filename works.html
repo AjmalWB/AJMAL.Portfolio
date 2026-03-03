@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Works – Ajmal Portfolio</title>
+  <link href="images/logo.webp" rel="icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="works.css">
+  <style>
+    .carousel-dot {
+      width: 10px; height: 10px;
+      background: var(--border);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0;
+    }
+    .carousel-dot.active { background: var(--accent); width: 26px; border-radius: 5px; }
+
+    /* ── KEY FIX: use CSS Grid so filtered cards always fill from top-left ── */
+    #projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 991px) { #projects-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 575px) { #projects-grid { grid-template-columns: 1fr; } }
+
+    /* each item wrapper */
+    .project-item {
+      /* shown by default */
+      display: block;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    /* hidden state — remove from flow */
+    .project-item.hidden {
+      display: none;
+    }
+    /* fade-in animation when becoming visible */
+    .project-item.fade-in {
+      animation: itemFadeIn 0.4s ease forwards;
+    }
+    @keyframes itemFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      height: 100%;
+    }
+    .project-card:hover { transform: translateY(-8px); border-color: rgba(255,92,26,0.4); box-shadow: var(--glow); }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 140px 0 60px; position: relative; overflow: hidden;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Selected Work</div>
+    <h1 class="hero-title" style="font-size: clamp(3rem,7vw,6rem);">
+      <span class="line">Bringing Brands</span>
+      <span class="line accent">to Life Through</span>
+      <span class="line stroke">Design</span>
+    </h1>
+    <p style="color: var(--gray-light); font-size:1.1rem; max-width:500px; margin-top:20px; animation: fadeInUp 1s 0.4s ease forwards; opacity:0;">
+      A curated collection of visual identities, packaging, and creative systems built for impact.
+    </p>
+  </div>
+</section>
+
+<!-- FEATURED CAROUSEL -->
+<section class="section" style="padding-top: 0;">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col reveal">
+        <div class="section-tag">Featured</div>
+        <h2 class="section-title">Latest <span class="accent">Projects</span></h2>
+      </div>
+    </div>
+    <div class="work-carousel reveal">
+      <div class="work-carousel-inner">
+        <div class="work-carousel-slide">
+          <div class="work-carousel-item">
+            <img src="images/04.webp" alt="E-Commerce"/>
+            <div class="work-carousel-caption">
+              <span style="font-family:var(--font-mono); font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em;">UI/UX Design</span>
+              <h3 style="font-family:var(--font-display); font-size:2.2rem; font-weight:800; margin-top:8px;">ShopFlow — E-Commerce Fashion Store</h3>
+              <p style="color:var(--gray-light); font-size:.9rem; margin-top:8px; max-width:500px;">Complete UX overhaul that increased conversions by 40% and reduced bounce rate by 25%.</p>
+            </div>
+          </div>
+          <div class="work-carousel-item">
+            <img src="images/Shift Logic.webp" alt="Brand"/>
+            <div class="work-carousel-caption">
+              <span style="font-family:var(--font-mono); font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em;">Brand Identity</span>
+              <h3 style="font-family:var(--font-display); font-size:2.2rem; font-weight:800; margin-top:8px;">Shift Logic— Complete Brand System</h3>
+              <p style="color:var(--gray-light); font-size:.9rem; margin-top:8px; max-width:500px;">Logo, brand guidelines, packaging, and digital assets for a premium wellness brand.</p>
+            </div>
+          </div>
+          <div class="work-carousel-item">
+            <img src="images/web02.webp" alt="Marketing"/>
+            <div class="work-carousel-caption">
+              <span style="font-family:var(--font-mono); font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em;">Web Design</span>
+              <h3 style="font-family:var(--font-display); font-size:2.2rem; font-weight:800; margin-top:8px;">E-commerce Website — Growth Campaign</h3>
+              <p style="color:var(--gray-light); font-size:.9rem; margin-top:8px; max-width:500px;">Multi-channel campaign delivering 3x ROAS and doubling organic traffic in 3 months.</p>
+            </div>
+          </div>
+
+
+
+          <div class="work-carousel-item">
+            <img src="images/ui05.webp" alt="E-Commerce"/>
+            <div class="work-carousel-caption">
+              <span style="font-family:var(--font-mono); font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em;">UI/UX Design</span>
+              <h3 style="font-family:var(--font-display); font-size:2.2rem; font-weight:800; margin-top:8px;">Track Teashop Mobile App </h3>
+              <p style="color:var(--gray-light); font-size:.9rem; margin-top:8px; max-width:500px;">Complete UX overhaul that increased conversions by 40% and reduced bounce rate by 25%.</p>
+            </div>
+          </div>
+          <div class="work-carousel-item">
+            <img src="images/web03.webp" alt="Brand"/>
+            <div class="work-carousel-caption">
+              <span style="font-family:var(--font-mono); font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em;">Web Design</span>
+              <h3 style="font-family:var(--font-display); font-size:2.2rem; font-weight:800; margin-top:8px;">E-Commerce Website</h3>
+              <p style="color:var(--gray-light); font-size:.9rem; margin-top:8px; max-width:500px;">Campaign delivering 3x ROAS for a retail brand.</p>
+            </div>
+          </div>
+          <div class="work-carousel-item">
+            <img src="images/ps10.webp" alt="Marketing"/>
+            <div class="work-carousel-caption">
+              <span style="font-family:var(--font-mono); font-size:.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em;">Graphic Design</span>
+              <h3 style="font-family:var(--font-display); font-size:2.2rem; font-weight:800; margin-top:8px;">E-commerce Website — Growth Campaign</h3>
+              <p style="color:var(--gray-light); font-size:.9rem; margin-top:8px; max-width:500px;">Posts, stories, ad creatives, templates — all platforms </p>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots d-flex gap-2 me-auto mt-2"></div>
+        <button class="carousel-btn carousel-prev" aria-label="Prev"><i class="fas fa-arrow-left"></i></button>
+        <button class="carousel-btn carousel-next" aria-label="Next"><i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+   PROJECT GALLERY SECTION — Drop this into your page
+   ============================================================ -->
+
+<!-- ALL PROJECTS GRID -->
+<section class="section projects-section" style="padding-top: 0;">
+  <div class="container">
+    <div class="row mb-4 align-items-end">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">All Work</div>
+        <h2 class="section-title">Project <span class="accent">Gallery</span></h2>
+      </div>
+      <div class="col-lg-6 reveal delay-2 text-lg-end">
+        <p class="section-subtitle" style="margin-left:auto;">
+          A curated selection of digital experiences crafted with intent, precision, and craft.
+        </p>
+      </div>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="work-filter reveal delay-1">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="uiux">UI/UX</button>
+      <button class="filter-btn" data-filter="web">Web Design</button>
+      <button class="filter-btn" data-filter="graphic">Graphic</button>
+      <button class="filter-btn" data-filter="marketing">Marketing</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div id="projects-grid">
+
+      <!-- 01 -->
+      <div class="project-item fade-in" data-cat="uiux"
+           data-title="ShopFlow — E-Commerce App"
+           data-cat-label="UI/UX Design"
+           data-tags="Figma,UX Research,Prototyping,User Testing"
+           data-year="2024"
+           data-desc="A full end-to-end redesign of a major e-commerce platform. Increased conversion rate by 38% through strategic UX research, streamlined checkout flows, and a modular design system built entirely in Figma. Shipped across iOS and Android."
+           data-img="images/ui02.webp"
+           data-url="https://www.figma.com/proto/CfKaSJB1eR9HL98lmpNUYZ/Untitled?node-id=1-2&t=m8uOJQKBq7At9GnC-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ui02.webp" alt="ShopFlow" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">01</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">UI/UX Design</div>
+            <div class="project-name">ShopFlow — E-Commerce App</div>
+            <div class="project-tags">
+              <span class="project-tag">Figma</span>
+              <span class="project-tag">UX Research</span>
+              <span class="project-tag">Prototyping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="JUEAY Gaming Headset — Poster Design"
+          data-cat-label="Gaming Advertisement"
+          data-tags="Photoshop,Product Poster,Advertising,Gaming"
+          data-year="2025"
+          data-desc="Promotional poster design for the JUEAY wireless gaming headset. The concept focuses on immersive sound, futuristic lighting, and bold gaming typography. Neon gradients and floating product composition create a powerful visual that highlights comfort, surround sound quality, and long-lasting wireless performance designed for competitive gamers."
+          data-img="images/Game.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/Game.webp" alt="JUEAY Gaming Headset Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">02</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Gaming Advertisement</div>
+            <div class="project-name">JUEAY — Gaming Headset Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Photoshop</span>
+              <span class="project-tag">Advertising</span>
+              <span class="project-tag">Product Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="project-item fade-in" data-cat="web"
+          data-title="Precious Pearl — Jewelry Website"
+          data-cat-label="E-Commerce Web Design"
+          data-tags="UI Design,Ecommerce,Responsive Design,Frontend"
+          data-year="2025"
+          data-desc="Luxury jewelry e-commerce website design for Precious Pearl. The layout focuses on elegance, dark premium aesthetics, and high-quality product presentation. Clean typography, refined spacing, and immersive product imagery highlight rings, necklaces, and earrings while guiding users smoothly through shopping and discovery."
+          data-img="images/web03.webp"
+          data-url="https://ajmalwb.github.io/PRECIOUS-PEARL/#home">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/web03.webp" alt="Precious Pearl Jewelry Website" width="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">03</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">E-Commerce Web Design</div>
+            <div class="project-name">Precious Pearl — Jewelry Website</div>
+            <div class="project-tags">
+              <span class="project-tag">UI Design</span>
+              <span class="project-tag">Ecommerce</span>
+              <span class="project-tag">Frontend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="project-item fade-in" data-cat="marketing"
+           data-title="Vibe Co. — Social Campaign"
+           data-cat-label="Digital Marketing"
+           data-tags="Meta Ads,SEO,Content Strategy,A/B Testing"
+           data-year="2023"
+           data-desc="A 360° social media campaign for a lifestyle brand targeting Gen Z. Managed Meta Ads with a $50K monthly budget, achieving 4.2x ROAS. Developed content strategy, creative direction, and performance analytics dashboard."
+           data-img="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=90"
+           data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Vibe" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">04</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Digital Marketing</div>
+            <div class="project-name">Vibe Co. — Social Campaign</div>
+            <div class="project-tags">
+              <span class="project-tag">Meta Ads</span>
+              <span class="project-tag">SEO</span>
+              <span class="project-tag">Content</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="project-item fade-in" data-cat="uiux"
+           data-title="Fintrack — Finance Dashboard"
+           data-cat-label="UI/UX Design"
+           data-tags="Figma,Data Visualization,Dashboard,React"
+           data-year="2024"
+           data-desc="A real-time personal finance dashboard with advanced data visualization. Designed an intuitive interface for tracking budgets, investments, and spending patterns. Includes dark/light mode, custom chart components, and accessibility compliance to WCAG 2.1 AA."
+           data-img="images/ui01.webp"
+           data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ui01.webp" alt="Finance App" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">05</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">UI/UX Design</div>
+            <div class="project-name">Teashop-track — Mobile App</div>
+            <div class="project-tags">
+              <span class="project-tag">Figma</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Porsche 911 — Poster Design"
+          data-cat-label="Automotive Poster"
+          data-tags="Photoshop,Poster Design,Automotive,Typography"
+          data-year="2025"
+          data-desc="High-end automotive poster design featuring the legendary Porsche 911. The concept focuses on timeless performance, bold typography, and premium visual composition. Textured numeric typography highlights the iconic 911 branding while the blue Porsche creates a powerful centerpiece, emphasizing speed, engineering excellence, and luxury automotive culture."
+          data-img="images/porsche.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/porsche.webp" alt="Porsche 911 Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">06</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Automotive Poster</div>
+            <div class="project-name">Porsche 911 — Poster Design</div>
+            <div class="project-tags">
+              <span class="project-tag">Photoshop</span>
+              <span class="project-tag">Typography</span>
+              <span class="project-tag">Poster</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="project-item fade-in" data-cat="web"
+          data-title="KOYA — Fashion E-Commerce Store"
+          data-cat-label="E-Commerce Web Design"
+          data-tags="UI Design,Ecommerce,Product UI,Frontend"
+          data-year="2025"
+          data-desc="Modern fashion e-commerce interface designed for KOYA clothing brand. The layout focuses on a premium dark theme, structured product grid, and smooth shopping experience. Advanced filtering, product categories, and clear visual hierarchy help users quickly discover clothing, accessories, and trending fashion items."
+          data-img="images/web02.webp"
+          data-url="https://ajmalwb.github.io/KOYA-FASHION-MAIN/index.html">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/web02.webp" alt="KOYA Fashion Store Website" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">07</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">E-Commerce Web Design</div>
+            <div class="project-name">KOYA — Fashion Store UI</div>
+            <div class="project-tags">
+              <span class="project-tag">UI Design</span>
+              <span class="project-tag">Ecommerce</span>
+              <span class="project-tag">Frontend</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="project-item fade-in" data-cat="marketing"
+           data-title="Kin Studio — SEO Growth"
+           data-cat-label="Digital Marketing"
+           data-tags="SEO,Analytics,Content,Link Building"
+           data-year="2023"
+           data-desc="A 12-month SEO engagement for a creative studio. Grew organic traffic from 2K to 45K monthly visitors through technical SEO audits, content strategy, and a structured link building program. Ranked #1 for 23 high-intent keywords in competitive niches."
+           data-img="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=1200&q=90"
+           data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80" alt="SEO" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">08</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Digital Marketing</div>
+            <div class="project-name">Kin Studio — SEO Growth</div>
+            <div class="project-tags">
+              <span class="project-tag">SEO</span>
+              <span class="project-tag">Analytics</span>
+              <span class="project-tag">Content</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09 -->
+      <div class="project-item fade-in" data-cat="uiux"
+           data-title="FitLife — Mobile App Design"
+           data-cat-label="UI/UX Design"
+           data-tags="Figma,Mobile,iOS,Android"
+           data-year="2024"
+           data-desc="A health and fitness tracking app designed for both iOS and Android. User research revealed gaps in existing apps — FitLife solves them with a personalized AI workout planner, nutrition logger, and social accountability features. Delivered full design system + developer handoff."
+           data-img="images/ui03.webp"
+           data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ui03.webp" alt="Mobile App" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">09</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">UI/UX Design</div>
+            <div class="project-name">Food Point — Mobile App Design</div>
+            <div class="project-tags">
+              <span class="project-tag">Figma</span>
+              <span class="project-tag">Mobile</span>
+              <span class="project-tag">iOS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="project-item fade-in" data-cat="web"
+          data-title="Climate Action Live — Editorial News Platform"
+          data-cat-label="Web Development"
+          data-tags="News Portal,UI/UX Design,Responsive Layout,Content Strategy"
+          data-year="2026"
+          data-desc="Modern climate-focused editorial platform featuring news, opinion pieces, green directories, and career resources. Designed with a clean content hierarchy, strong visual storytelling, and structured category navigation. Optimized for readability, engagement, and environmental awareness campaigns."
+          data-img="images/web06.webp"
+          data-url="https://amindtech10-ptiua.wpcomstaging.com/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/web06.webp" alt="Climate Action Live Editorial Platform" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">10</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Web Development</div>
+            <div class="project-name">Climate Action Live — Editorial News Platform</div>
+            <div class="project-tags">
+              <span class="project-tag">News Portal</span>
+              <span class="project-tag">UI/UX Design</span>
+              <span class="project-tag">Responsive</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Free Local Delivery — Pizza Poster"
+          data-cat-label="Food Advertisement"
+          data-tags="Photoshop,Poster Design,Advertising,Food Branding"
+          data-year="2025"
+          data-desc="Promotional poster created for a pizza brand campaign highlighting free local delivery. The design uses bold typography, vibrant gradients, and playful food illustrations in the background. A delivery scooter carrying stacked pizza boxes becomes the focal element, reinforcing speed, convenience, and local service while keeping the layout energetic and appetizing."
+          data-img="images/OG pstr.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/OG pstr.webp" alt="Pizza Delivery Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">11</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Food Advertisement</div>
+            <div class="project-name">Free Local Delivery — Pizza Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Photoshop</span>
+              <span class="project-tag">Poster</span>
+              <span class="project-tag">Advertising</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="project-item fade-in" data-cat="marketing"
+           data-title="Luminary — Email Funnels"
+           data-cat-label="Digital Marketing"
+           data-tags="Email Marketing,Klaviyo,Automation,Copywriting"
+           data-year="2024"
+           data-desc="Designed and wrote a 9-email welcome + nurture sequence for a D2C wellness brand. The sequence averaged 58% open rate and 22% click-to-purchase. Includes abandoned cart, post-purchase, and winback flows — all built in Klaviyo with A/B testing."
+           data-img="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200&q=90"
+           data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80" alt="Email Marketing" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">12</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Digital Marketing</div>
+            <div class="project-name">Luminary — Email Funnels</div>
+            <div class="project-tags">
+              <span class="project-tag">Klaviyo</span>
+              <span class="project-tag">Email</span>
+              <span class="project-tag">Automation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /#projects-grid -->
+
+
+    <!-- ========newadd======================================================= -->
+
+
+    <!-- Projects Grid -->
+    <div id="projects-grid">
+
+      <!-- 13 -->
+      <div class="project-item fade-in" data-cat="uiux"
+           data-title="ShopFlow — E-Commerce App"
+           data-cat-label="UI/UX Design"
+           data-tags="Figma,UX Research,Prototyping,User Testing"
+           data-year="2024"
+           data-desc="A full end-to-end redesign of a major e-commerce platform. Increased conversion rate by 38% through strategic UX research, streamlined checkout flows, and a modular design system built entirely in Figma. Shipped across iOS and Android."
+           data-img="images/04.webp"
+           data-url="https://www.figma.com/proto/CfKaSJB1eR9HL98lmpNUYZ/Untitled?node-id=1-2&t=m8uOJQKBq7At9GnC-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/04.webp" alt="ShopFlow" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">13</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">UI/UX Design</div>
+            <div class="project-name">ShopFlow — E-Commerce App</div>
+            <div class="project-tags">
+              <span class="project-tag">Figma</span>
+              <span class="project-tag">UX Research</span>
+              <span class="project-tag">Prototyping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Elegance — Luxury Perfume Poster"
+          data-cat-label="Luxury Product Advertising"
+          data-tags="Luxury Branding,Perfume Design,Photoshop,Product Advertising"
+          data-year="2025"
+          data-desc="High-end luxury perfume poster design centered on elegance, refinement, and sensory appeal. The visual concept uses warm golden tones, flowing powder textures, and premium lighting to evoke sophistication and timeless beauty. Designed to highlight the fragrance as an object of desire, blending minimal typography with cinematic product composition."
+          data-img="images/perfume.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/perfume.webp" alt="Elegance Luxury Perfume Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">14</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Luxury Product Advertising</div>
+            <div class="project-name">Elegance — Luxury Perfume Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Luxury Branding</span>
+              <span class="project-tag">Perfume Design</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="project-item fade-in" data-cat="web"
+          data-title="Nexxa Auto Parts — eCommerce Platform"
+          data-cat-label="Web Development"
+          data-tags="eCommerce,Automotive,UI/UX,Search System"
+          data-year="2026"
+          data-desc="High-performance automotive eCommerce platform for OEM used auto parts. Features intelligent vehicle-based search (Year/Make/Model), VIN matching system, category navigation for major brands, and conversion-focused UI. Designed to highlight trust factors like nationwide shipping, expert support, and low-mileage verified parts."
+          data-img="images/web07.webp"
+          data-url="https://nexxaauto.com/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/web07.webp" alt="Nexxa Auto Parts eCommerce Platform" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">15</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Web Development</div>
+            <div class="project-name">Nexxa Auto Parts — eCommerce Platform</div>
+            <div class="project-tags">
+              <span class="project-tag">eCommerce</span>
+              <span class="project-tag">Automotive</span>
+              <span class="project-tag">UI/UX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 16 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Nike — Upcoming Drops Sneaker Poster"
+          data-cat-label="Brand Advertisement"
+          data-tags="Product Advertising,Poster Design,Brand Campaign,Photoshop"
+          data-year="2025"
+          data-desc="Minimalist promotional poster design for Nike's 'Upcoming Drops' campaign. The concept highlights a premium sneaker with a clean monochromatic beige palette, bold typography, and dynamic floating composition. The oversized swoosh in the background reinforces brand identity while the elevated product placement creates anticipation and exclusivity around the release."
+          data-img="images/nike.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/nike.webp" alt="Nike Upcoming Drops Sneaker Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">16</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Brand Advertisement</div>
+            <div class="project-name">Nike — Upcoming Drops Sneaker Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Poster Design</span>
+              <span class="project-tag">Brand Campaign</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 17 -->
+      <div class="project-item fade-in" data-cat="uiux"
+           data-title="Fintrack — Finance Dashboard"
+           data-cat-label="UI/UX Design"
+           data-tags="Figma,Data Visualization,Dashboard,React"
+           data-year="2024"
+           data-desc="A real-time personal finance dashboard with advanced data visualization. Designed an intuitive interface for tracking budgets, investments, and spending patterns. Includes dark/light mode, custom chart components, and accessibility compliance to WCAG 2.1 AA."
+           data-img="images/ui05.webp"
+           data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ui05.webp" alt="Finance App" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">17</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">UI/UX Design</div>
+            <div class="project-name">Teashop-track — Mobile App</div>
+            <div class="project-tags">
+              <span class="project-tag">Figma</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 18 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Packard Twelve Sport — Vintage Automotive Poster"
+          data-cat-label="Classic Automotive Poster"
+          data-tags="Vintage Design,Automotive Poster,Photoshop,Typography"
+          data-year="2025"
+          data-desc="Classic automotive poster design inspired by the 1934 Packard Twelve Sport Coupe by LeBaron. The composition emphasizes timeless luxury, craftsmanship, and heritage through dramatic lighting, atmospheric smoke, and elegant gold typography. Designed to celebrate the golden age of American automotive engineering and Packard's legacy of refinement and prestige."
+          data-img="images/packard.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/packard.webp" alt="Packard Twelve Sport Vintage Automotive Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">18</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Classic Automotive Poster</div>
+            <div class="project-name">Packard Twelve Sport — Vintage Automotive Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Vintage Design</span>
+              <span class="project-tag">Automotive</span>
+              <span class="project-tag">Typography</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 19 -->
+      <div class="project-item fade-in" data-cat="web"
+          data-title="Ajueey — Gaming Brand Website"
+          data-cat-label="Web Development"
+          data-tags="Gaming Brand,UI Design,Dark Theme,Brand Storytelling"
+          data-year="2026"
+          data-desc="Immersive gaming brand website for Ajueey, showcasing the company's mission, history, and esports-focused vision. Designed with a futuristic dark UI, neon-accent visuals, and high-impact imagery to reflect performance-driven gaming culture. Emphasizes brand storytelling, premium aesthetics, and a modern gamer-centric experience."
+          data-img="images/web04.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/web04.webp" alt="Ajueey Gaming Brand Website" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">19</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Web Development</div>
+            <div class="project-name">Ajueey — Gaming Brand Website</div>
+            <div class="project-tags">
+              <span class="project-tag">Gaming</span>
+              <span class="project-tag">UI Design</span>
+              <span class="project-tag">Dark Theme</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 20 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Adidas SL 72 OG — Lifestyle Sneaker Poster"
+          data-cat-label="Brand Product Advertisement"
+          data-tags="Sneaker Design,Product Poster,Brand Campaign,Photoshop"
+          data-year="2025"
+          data-desc="Lifestyle sneaker poster design for the Adidas SL 72 OG, inspired by archival racing shoes first introduced in 1972. The design uses a warm, minimal color palette, soft studio lighting, and balanced typography to highlight the shoe's heritage, comfort, and everyday versatility. The composition blends vintage sport identity with modern lifestyle aesthetics, reinforcing Adidas' legacy of turning performance into style."
+          data-img="images/adidass.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/adidass.webp" alt="Adidas SL 72 OG Sneaker Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">20</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Brand Product Advertisement</div>
+            <div class="project-name">Adidas SL 72 OG — Lifestyle Sneaker Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Sneaker Design</span>
+              <span class="project-tag">Brand Campaign</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 21 -->
+      <div class="project-item fade-in" data-cat="uiux"
+           data-title="FitLife — Mobile App Design"
+           data-cat-label="UI/UX Design"
+           data-tags="Figma,Mobile,iOS,Android"
+           data-year="2024"
+           data-desc="A health and fitness tracking app designed for both iOS and Android. User research revealed gaps in existing apps — FitLife solves them with a personalized AI workout planner, nutrition logger, and social accountability features. Delivered full design system + developer handoff."
+           data-img="images/ui04.webp"
+           data-url="https://www.figma.com/proto/CfKaSJB1eR9HL98lmpNUYZ/Untitled?node-id=1-2&t=m8uOJQKBq7At9GnC-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ui04.webp" alt="Mobile App" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">View Project <i class="fas fa-arrow-right"></i></div>
+            </div>
+            <div class="project-num-badge">21</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">UI/UX Design</div>
+            <div class="project-name">Food Point — Mobile App Design</div>
+            <div class="project-tags">
+              <span class="project-tag">Figma</span>
+              <span class="project-tag">Mobile</span>
+              <span class="project-tag">iOS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 22 -->
+      <div class="project-item fade-in" data-cat="web"
+          data-title="Nexxa Auto Parts — Modern Automotive eCommerce"
+          data-cat-label="Web Development"
+          data-tags="eCommerce,Automotive UI,Dark Theme,Search UX"
+          data-year="2026"
+          data-desc="Modern dark-themed automotive eCommerce platform for Nexxa Auto Parts. Features an intelligent Year/Make/Model search system with VIN lookup integration, conversion-focused hero layout, and trust-driven highlights including expert support, nationwide shipping, and low-mileage OEM parts. Designed with a high-contrast gradient UI and performance-optimized structure for seamless vehicle part discovery."
+          data-img="images/web08.webp"
+          data-url="https://nexxaauto.com/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/web08.webp" alt="Nexxa Auto Parts Modern eCommerce UI" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">22</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Web Development</div>
+            <div class="project-name">Nexxa Auto Parts — Modern Automotive eCommerce</div>
+            <div class="project-tags">
+              <span class="project-tag">eCommerce</span>
+              <span class="project-tag">Automotive UI</span>
+              <span class="project-tag">Dark Theme</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 23 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Eko — Film Poster Design"
+          data-cat-label="Movie Poster Design"
+          data-tags="Film Poster,Cinematic Design,Photoshop,Visual Storytelling"
+          data-year="2025"
+          data-desc="Cinematic movie poster design for Eko, the final chapter of the animal trilogy by the makers of Kishkindha Kaandam. The visual centers on emotional storytelling, portraying a powerful bond between a man and two dogs. Warm color grading, dramatic lighting, and expressive character composition create a soulful, character-driven poster that conveys loyalty, survival, and human–animal connection."
+          data-img="images/ps4.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps4.webp" alt="Eko Film Poster Design" height="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">23</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Movie Poster Design</div>
+            <div class="project-name">Eko — Film Poster Design</div>
+            <div class="project-tags">
+              <span class="project-tag">Film Poster</span>
+              <span class="project-tag">Cinematic</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 24 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Ajueay — Brand Manifesto Poster"
+          data-cat-label="Personal Branding Design"
+          data-tags="Brand Identity,Typography,Poster Design,Visual Branding"
+          data-year="2025"
+          data-desc="Bold personal branding poster design conveying the philosophy 'Design is the silent ambassador of your brand.' The concept blends strong typographic hierarchy with moody lighting and modern portrait composition. Designed to position Ajueay as a premium brand creator, emphasizing confidence, clarity, and visual storytelling through minimal color palettes and high-contrast aesthetics."
+          data-img="images/ps1.webp"
+          data-url="https://www.behance.net/ajmalaju165">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps1.webp" alt="Ajueay Brand Manifesto Poster" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">24</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Personal Branding Design</div>
+            <div class="project-name">Ajueay — Brand Manifesto Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Brand Identity</span>
+              <span class="project-tag">Typography</span>
+              <span class="project-tag">Poster Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 25 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Nike — Just Do It Lifestyle Poster"
+          data-cat-label="Brand Lifestyle Advertisement"
+          data-tags="Lifestyle Poster,Brand Campaign,Photoshop,Fashion Design"
+          data-year="2025"
+          data-desc="Lifestyle poster design inspired by Nike's iconic 'Just Do It' campaign. The composition blends fashion-forward styling with bold brand messaging, using a clean editorial layout, torn-paper textures, and vibrant accent colors. The relaxed yet confident pose highlights individuality, self-expression, and modern streetwear culture, reinforcing Nike's philosophy of action, attitude, and personal style."
+          data-img="images/ps2.webp"
+          data-url="https://in.pinterest.com/Ajueayy/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps2.webp" alt="Nike Just Do It Lifestyle Poster" height="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">25</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Brand Lifestyle Advertisement</div>
+            <div class="project-name">Nike — Just Do It Lifestyle Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Lifestyle Poster</span>
+              <span class="project-tag">Brand Campaign</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 26 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="JUEAY EFX — Social Media Marketing Poster"
+          data-cat-label="Digital Marketing Advertisement"
+          data-tags="Social Media Marketing,Brand Promotion,Poster Design,Photoshop"
+          data-year="2025"
+          data-desc="Promotional poster design for JUEAY EFX, a social media strategy and brand growth service. The concept combines modern 3D composition with vibrant purple-blue gradients, showcasing a dynamic Instagram interface on a large mobile display. The relaxed, confident subject reinforces ease and trust, while bold messaging communicates clarity: 'Let us handle the strategy.' Designed to position the brand as a modern solution for businesses navigating the fast-paced social media landscape."
+          data-img="images/ps8.webp"
+          data-url="https://in.pinterest.com/Ajueayy/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps8.webp" alt="JUEAY EFX Social Media Marketing Poster" height="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">26</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Digital Marketing Advertisement</div>
+            <div class="project-name">JUEAY EFX — Social Media Marketing Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Social Media Marketing</span>
+              <span class="project-tag">Brand Promotion</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 27 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Aquaticus — Summer '24 Footwear Campaign"
+          data-cat-label="Fashion Product Advertisement"
+          data-tags="Fashion Campaign,Footwear Design,Product Poster,Photoshop"
+          data-year="2025"
+          data-desc="Premium fashion poster design for Aquaticus Summer '24 Collection. The visual highlights effortless style and elevated comfort through a minimalist studio setup, warm sand-toned palette, and bold oversized footwear composition. The relaxed model styling and clean typography communicate modern resort wear aesthetics, positioning Aquaticus as a refined lifestyle brand focused on comfort, versatility, and contemporary fashion."
+          data-img="images/ps5.webp"
+          data-url="https://in.pinterest.com/Ajueayy/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps5.webp" alt="Aquaticus Summer 24 Footwear Campaign Poster" height="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">27</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Fashion Product Advertisement</div>
+            <div class="project-name">Aquaticus — Summer '24 Footwear Campaign</div>
+            <div class="project-tags">
+              <span class="project-tag">Fashion Campaign</span>
+              <span class="project-tag">Footwear Design</span>
+              <span class="project-tag">Photoshop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 28 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="SKENA — Fashion Editorial Poster"
+          data-cat-label="Fashion Editorial Design"
+          data-tags="Fashion Poster,Editorial Design,Lookbook Layout,Typography"
+          data-year="2025"
+          data-desc="Editorial fashion poster design for SKENA's Special Edition Collection. The layout blends modern magazine-style typography with minimalist composition, creating a refined and contemporary fashion lookbook aesthetic. Strong serif headlines, asymmetrical text placement, and soft neutral tones elevate the visual identity, positioning SKENA as a sophisticated, trend-forward fashion brand."
+          data-img="images/ps3.webp"
+          data-url="https://in.pinterest.com/Ajueayy/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps3.webp" alt="SKENA Fashion Editorial Poster" height="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">28</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Fashion Editorial Design</div>
+            <div class="project-name">SKENA — Fashion Editorial Poster</div>
+            <div class="project-tags">
+              <span class="project-tag">Fashion Poster</span>
+              <span class="project-tag">Editorial Design</span>
+              <span class="project-tag">Typography</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 29 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Explore — Street Spirit Fashion Campaign"
+          data-cat-label="Streetwear Editorial Design"
+          data-tags="Streetwear Campaign,Fashion Poster,Editorial Layout,Photoshop"
+          data-year="2025"
+          data-desc="Streetwear-inspired fashion campaign poster titled 'Explore — Street Spirit.' The design combines bold oversized typography with a clean studio backdrop and heritage-inspired color palette. Layered layout elements, inset framing, and minimal editorial text create a modern magazine-style composition. The campaign emphasizes confidence, urban rhythm, and contemporary tailoring, redefining everyday street fashion through structured silhouettes and warm neutral tones."
+          data-img="images/ps6.webp"
+          data-url="https://in.pinterest.com/Ajueayy/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps6.webp" alt="Explore Street Spirit Fashion Campaign Poster" height="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">29</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Streetwear Editorial Design</div>
+            <div class="project-name">Explore — Street Spirit Fashion Campaign</div>
+            <div class="project-tags">
+              <span class="project-tag">Streetwear Campaign</span>
+              <span class="project-tag">Fashion Poster</span>
+              <span class="project-tag">Editorial Layout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 30 -->
+      <div class="project-item fade-in" data-cat="graphic"
+          data-title="Velocity — Motorsport Magazine Cover"
+          data-cat-label="Editorial Cover Design"
+          data-tags="Magazine Cover,Editorial Design,Motorsport Branding,Photoshop"
+          data-year="2025"
+          data-desc="High-impact magazine cover design for Velocity, the global motorsport authority. The concept blends bold editorial typography with dramatic lighting and a commanding portrait of a rising racing star. Oversized numeric composition, high-contrast color blocking, and premium styling emphasize speed, power, and precision—capturing the adrenaline and prestige of modern motorsport culture."
+          data-img="images/ps9.webp"
+          data-url="https://in.pinterest.com/Ajueayy/">
+        <div class="project-card">
+          <div class="project-img-wrap">
+            <img src="images/ps9.webp" alt="Velocity Motorsport Magazine Cover Design" height="100%" loading="lazy"/>
+            <div class="project-overlay">
+              <div class="project-overlay-btn proj-trigger">
+                View Project <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="project-num-badge">30</div>
+          </div>
+          <div class="project-info">
+            <div class="project-cat">Editorial Cover Design</div>
+            <div class="project-name">Velocity — Motorsport Magazine Cover</div>
+            <div class="project-tags">
+              <span class="project-tag">Magazine Cover</span>
+              <span class="project-tag">Editorial Design</span>
+              <span class="project-tag">Motorsport</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /#projects-grid -->
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+   PROJECT MODAL — Place just before </body>
+   ============================================================ -->
+<div id="project-modal" class="pmodal-backdrop" role="dialog" aria-modal="true" aria-label="Project Details">
+  <div class="pmodal-container">
+
+    <!-- Close -->
+    <button class="pmodal-close" id="pmodal-close" aria-label="Close">
+      <span></span><span></span>
+    </button>
+
+    <!-- Left — Image Panel -->
+    <div class="pmodal-img-panel">
+      <div class="pmodal-img-wrap">
+        <img id="pmodal-img" src="" alt="" />
+        <div class="pmodal-img-overlay"></div>
+      </div>
+      <!-- Floating accent line decoration -->
+      <div class="pmodal-deco-line"></div>
+    </div>
+
+    <!-- Right — Info Panel -->
+    <div class="pmodal-info-panel">
+
+      <div class="pmodal-meta-row">
+        <span class="pmodal-cat" id="pmodal-cat"></span>
+        <span class="pmodal-year" id="pmodal-year"></span>
+      </div>
+
+      <h2 class="pmodal-title" id="pmodal-title"></h2>
+
+      <div class="pmodal-divider"></div>
+
+      <p class="pmodal-desc" id="pmodal-desc"></p>
+
+      <div class="pmodal-tags-wrap" id="pmodal-tags"></div>
+
+      <div class="pmodal-actions">
+        <a href="#" class="btn-primary-custom btn-magnetic pmodal-cta" id="pmodal-live-btn" target="_blank" rel="noopener noreferrer">
+          View Live Project <i class="fas fa-arrow-up-right-from-square"></i>
+        </a>
+        <a href="works.html" class="btn-outline-custom pmodal-cta-ghost">
+          Case Study <i class="fas fa-file-lines"></i>
+        </a>
+      </div>
+
+      <!-- Nav inside modal -->
+      <div class="pmodal-nav">
+        <button class="pmodal-nav-btn" id="pmodal-prev" aria-label="Previous project">
+          <i class="fas fa-arrow-left"></i> Prev
+        </button>
+        <span class="pmodal-nav-count" id="pmodal-nav-count"></span>
+        <button class="pmodal-nav-btn" id="pmodal-next" aria-label="Next project">
+          Next <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!-- /END MODAL -->
+
+
+
+<!-- CTA -->
+<section style="padding: 80px 0; background: var(--bg-card); border-top: 1px solid var(--border);">
+  <div class="container text-center reveal">
+    <div class="section-tag justify-content-center">New Project?</div>
+    <h2 class="section-title mb-4">Let's Create Something <span class="accent">Remarkable</span></h2>
+    <a href="contact.html" class="btn-primary-custom btn-magnetic" style="font-size:1rem; padding:16px 40px;">
+      Start a Project <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="resume.html" class="footer-link">Resume</a>
+        <a href="works.html" class="footer-link">Works</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Get In Touch</div>
+        <p style="font-size:.9rem; color: var(--gray); margin-bottom:16px;">Let's build something together.</p>
+        <a href="contact.html" class="btn-primary-custom" style="display:inline-flex; font-size:.85rem; padding:12px 24px;">Contact Me <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Ajmal. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script src="works.js"></script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Design — Ajmal</title>
+  <link href="images/logo.webp" rel="icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="gallery.css"/>
+  <style>
+    /* Web Design — hero diagonal line accent */
+    .sp-hero::before {
+      content:''; position:absolute; top:0; right:0;
+      width:40%; height:100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(255,92,26,0.06) 100%);
+      clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+      pointer-events:none;
+    }
+    /* Animated neon underline on headline */
+    .neon-underline { position:relative; display:inline-block; }
+    .neon-underline::after {
+      content:''; position:absolute; left:0; bottom:-4px;
+      width:0%; height:3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius:2px; animation: neonLine 1s 1s cubic-bezier(0.23,1,0.32,1) forwards;
+    }
+    @keyframes neonLine { to { width:100%; } }
+    /* Responsive score ring */
+    .score-ring-wrap { position:relative; width:120px; height:120px; margin:auto; }
+    .score-ring-wrap svg { width:100%; height:100%; transform:rotate(-90deg); }
+    .score-circle-bg { fill:none; stroke:rgba(255,255,255,0.06); stroke-width:6; }
+    .score-circle-fill { fill:none; stroke:var(--accent); stroke-width:6; stroke-linecap:round; stroke-dasharray:339; stroke-dashoffset:339; transition:stroke-dashoffset 2s cubic-bezier(0.23,1,0.32,1); }
+    .score-circle-fill.animate { stroke-dashoffset:20; }
+    .score-label { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; }
+    .score-label .num { font-family:var(--font-display); font-size:1.6rem; font-weight:800; color:var(--white); }
+    .score-label .sub { font-family:var(--font-mono); font-size:0.6rem; color:var(--gray); }
+    /* Pricing mini-table */
+    .price-table { background:var(--bg-card); border:1px solid var(--border); border-radius:20px; overflow:hidden; }
+    .pt-header { background:var(--accent); padding:20px 28px; display:flex; justify-content:space-between; align-items:center; }
+    .pt-title { font-family:var(--font-display); font-size:1.1rem; font-weight:800; color:var(--white); }
+    .pt-price { font-family:var(--font-display); font-size:1.8rem; font-weight:800; color:var(--white); }
+    .pt-row { display:flex; align-items:center; gap:12px; padding:14px 28px; border-bottom:1px solid var(--border); font-size:.88rem; color:var(--gray-light); }
+    .pt-row:last-child { border-bottom:0; }
+    .pt-row i { color:var(--accent); width:16px; }
+    /* Step cards — horizontal numbered */
+    .web-step-card {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:20px;
+      padding:32px 28px; height:100%; transition:var(--transition); position:relative; overflow:hidden;
+    }
+    .web-step-card:hover { border-color:rgba(255,92,26,0.4); transform:translateY(-6px); box-shadow:var(--glow); }
+    .ws-num-bg {
+      font-family:var(--font-display); font-size:5.5rem; font-weight:800;
+      color:rgba(255,92,26,0.08); position:absolute; right:16px; bottom:-10px; line-height:1;
+    }
+    .ws-icon { font-size:1.8rem; margin-bottom:16px; }
+    .ws-title { font-family:var(--font-display); font-size:1.1rem; font-weight:700; margin-bottom:8px; }
+    .ws-desc { font-size:.86rem; color:var(--gray); line-height:1.75; }
+    .ws-tag { display:inline-block; background:rgba(255,92,26,0.1); border:1px solid rgba(255,92,26,0.25); color:var(--accent); font-family:var(--font-mono); font-size:.65rem; padding:3px 10px; border-radius:50px; margin-top:12px; }
+    /* Speed meter */
+    .speed-meter {
+      background:var(--bg-card); border:1px solid var(--border); border-radius:20px;
+      padding:32px; display:flex; flex-direction:column; align-items:center; gap:16px;
+    }
+    .sp-marquee { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:16px 0; overflow:hidden; background:var(--bg-card); }
+    .sp-marquee-track { display:flex; gap:60px; animation:marqueeScroll 22s linear infinite; white-space:nowrap; }
+    .sp-marquee-track:hover { animation-play-state:paused; }
+    @keyframes marqueeScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    .sp-marquee-item { display:inline-flex; align-items:center; gap:12px; font-family:var(--font-display); font-size:.82rem; font-weight:600; color:var(--gray); text-transform:uppercase; letter-spacing:.1em; flex-shrink:0; }
+    .sp-marquee-dot { width:5px; height:5px; background:var(--accent); border-radius:50%; }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="sp-hero">
+  <div class="hero-bg-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <a href="service.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+        <div class="sp-badge"><span class="sp-badge-dot"></span> Service — 02</div>
+        <h1 class="sp-hero-title">
+          <span class="line">Web</span>
+          <span class="line accent neon-underline">Design</span>
+          <span class="line stroke" style="font-size: clamp(75px, 4.5vw, 90px);">That Performs</span>
+        </h1>
+        <p class="sp-hero-desc">Visually stunning, blazing-fast websites built on Webflow, WordPress, or custom HTML/CSS — optimised for SEO, speed, and conversions.</p>
+        <div class="sp-hero-actions">
+          <a href="contact.html" class="btn-primary-custom btn-magnetic">Start a Project <i class="fas fa-arrow-right"></i></a>
+          <a href="works.html" class="btn-outline-custom">See Live Sites <i class="fas fa-external-link-alt"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="web-hero-mockup parallax-target">
+          <div class="web-browser-frame">
+            <div class="web-browser-bar">
+              <div class="wb-dots"><div class="wb-dot r"></div><div class="wb-dot y"></div><div class="wb-dot g"></div></div>
+              <div class="wb-url-bar">https://yoursite.com</div>
+            </div>
+            <div class="web-browser-content">
+              <div class="wb-content-inner">
+                <div class="wb-hero-stripe"></div>
+                <div class="wb-text-lines">
+                  <div style="width:80%;"></div>
+                  <div style="width:60%;"></div>
+                  <div style="width:70%;"></div>
+                </div>
+                <div class="wb-card-row">
+                  <div class="wb-mini-card"></div>
+                  <div class="wb-mini-card"></div>
+                  <div class="wb-mini-card"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="web-float-stat ws1">
+            <div class="ws-num">100</div>
+            <div class="ws-label">PageSpeed Score</div>
+          </div>
+          <div class="web-float-stat ws2">
+            <div class="ws-num">&lt;1s</div>
+            <div class="ws-label">Load Time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="sp-marquee">
+  <div class="sp-marquee-track">
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Webflow</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> WordPress</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> HTML / CSS / JS</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Mobile-First</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> SEO Optimised</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Fast Loading</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Bootstrap</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> GSAP Animations</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Webflow</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> WordPress</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> HTML / CSS / JS</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Mobile-First</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> SEO Optimised</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Fast Loading</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Bootstrap</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> GSAP Animations</span>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">What You Get</div>
+        <h2 class="section-title">Every Site Comes <span class="accent">Fully Loaded</span></h2>
+        <p class="section-subtitle">Not just design — a complete digital presence engineered for growth.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal delay-1">
+        <div class="web-feature-card">
+          <span class="wf-icon">⚡</span>
+          <div class="wf-title">Blazing Fast</div>
+          <div class="wf-desc">Optimised images, clean code, and lazy loading. PageSpeed 95+ scores. Your visitors won't wait.</div>
+          <div class="wf-tag">Performance</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-2">
+        <div class="web-feature-card">
+          <span class="wf-icon">📱</span>
+          <div class="wf-title">Fully Responsive</div>
+          <div class="wf-desc">Pixel-perfect on every screen — phone, tablet, laptop, 4K display. No compromises.</div>
+          <div class="wf-tag">Mobile-First</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-3">
+        <div class="web-feature-card">
+          <span class="wf-icon">🔍</span>
+          <div class="wf-title">SEO Ready</div>
+          <div class="wf-desc">Semantic HTML, meta tags, schema markup, sitemap, robots.txt. Discovered by Google from day one.</div>
+          <div class="wf-tag">Visibility</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-1">
+        <div class="web-feature-card">
+          <span class="wf-icon">🎬</span>
+          <div class="wf-title">Premium Animations</div>
+          <div class="wf-desc">Scroll reveals, hover effects, micro-interactions and page transitions that feel alive and premium.</div>
+          <div class="wf-tag">Engagement</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-2">
+        <div class="web-feature-card">
+          <span class="wf-icon">♿</span>
+          <div class="wf-title">Accessible</div>
+          <div class="wf-desc">WCAG-compliant. Keyboard navigable. Screen-reader friendly. Inclusive by design.</div>
+          <div class="wf-tag">Inclusion</div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal delay-3">
+        <div class="web-feature-card">
+          <span class="wf-icon">🛠️</span>
+          <div class="wf-title">Easy to Manage</div>
+          <div class="wf-desc">CMS-powered so you can edit content yourself. No developer needed for day-to-day updates.</div>
+          <div class="wf-tag">Maintenance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS STEPS -->
+<section class="section" style="background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Process</div>
+        <h2 class="section-title">From Idea to <span class="accent">Live Website</span></h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal delay-1">
+        <div class="web-step-card">
+          <div class="ws-num-bg">01</div>
+          <div class="ws-icon">💬</div>
+          <div class="ws-title">Brief &amp; Strategy</div>
+          <div class="ws-desc">Discovery call, goal-setting, sitemap planning and tech stack selection.</div>
+          <div class="ws-tag">Week 1</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal delay-2">
+        <div class="web-step-card">
+          <div class="ws-num-bg">02</div>
+          <div class="ws-icon">🎨</div>
+          <div class="ws-title">Design Mockup</div>
+          <div class="ws-desc">Figma mockups for all pages, responsive states and hover interactions.</div>
+          <div class="ws-tag">Week 1–2</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal delay-3">
+        <div class="web-step-card">
+          <div class="ws-num-bg">03</div>
+          <div class="ws-icon">💻</div>
+          <div class="ws-title">Build &amp; Animate</div>
+          <div class="ws-desc">Webflow / WordPress development with premium animations and full CMS setup.</div>
+          <div class="ws-tag">Week 2–4</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal delay-4">
+        <div class="web-step-card">
+          <div class="ws-num-bg">04</div>
+          <div class="ws-icon">🚀</div>
+          <div class="ws-title">Launch &amp; Support</div>
+          <div class="ws-desc">Final QA, domain setup, analytics install and 30-day post-launch support.</div>
+          <div class="ws-tag">Week 4+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5 align-items-end">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Tech Stack</div>
+        <h2 class="section-title">Tools of the <span class="accent">Trade</span></h2>
+      </div>
+    </div>
+    <div class="tech-stack-row reveal">
+      <div class="tech-badge"><span class="tech-badge-icon">🔷</span> Webflow</div>
+      <div class="tech-badge"><span class="tech-badge-icon">📰</span> WordPress</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🌐</span> HTML5 / CSS3</div>
+      <div class="tech-badge"><span class="tech-badge-icon">⚡</span> JavaScript</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🅱️</span> Bootstrap 5</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🎯</span> GSAP</div>
+      <div class="tech-badge"><span class="tech-badge-icon">🔍</span> SEO Tools</div>
+      <div class="tech-badge"><span class="tech-badge-icon">📊</span> Analytics</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="section-tag justify-content-center mb-4">FAQ</div>
+        <h2 class="section-title text-center mb-5">Web Design <span class="accent">Questions</span></h2>
+        <div class="faq-item reveal">
+          <div class="faq-q">Can I edit the website myself after delivery? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">Yes. All websites are built with a CMS (Webflow Editor or WordPress) so you can update text, images, and blog posts without any coding knowledge. I also provide a brief tutorial video.</div>
+        </div>
+        <div class="faq-item reveal delay-1">
+          <div class="faq-q">Do you provide hosting? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">I help you choose and set up hosting (Webflow hosting, Hostinger, SiteGround etc.) but the hosting fees are billed directly to you. I'm available to assist with setup and migration.</div>
+        </div>
+        <div class="faq-item reveal delay-2">
+          <div class="faq-q">How many pages are included? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">It depends on the package. Starter includes 1 page (landing), Pro includes up to 5 pages, Enterprise is unlimited. Additional pages can always be added at a reasonable rate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="container reveal">
+    <div class="section-tag justify-content-center">Let's Build</div>
+    <h2 class="section-title mb-4">Your Dream Website Starts <span class="accent">Here</span></h2>
+    <p style="color:var(--gray-light); max-width:420px; margin:0 auto 32px; font-size:.95rem;">Fast, beautiful, and built to grow your business. Let's get started.</p>
+    <a href="contact.html" class="btn-primary-custom btn-magnetic" style="font-size:1rem; padding:16px 40px;">Start My Website <i class="fas fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="works.html" class="footer-link">Works</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Let's Work Together</div>
+        <p style="font-size:.9rem; color:var(--gray); margin-bottom:16px;">Ready to launch something great?</p>
+        <a href="contact.html" class="btn-primary-custom" style="display:inline-flex; font-size:.85rem; padding:12px 24px;">Contact Me <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Ajmal. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script src="gallery.js"></script>
+<script>
+// Animate score rings on scroll
+const rings = document.querySelectorAll('.score-circle-fill');
+const ringIO = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('animate'); });
+}, {threshold: 0.5});
+rings.forEach(r => ringIO.observe(r));
+</script>
+</body>
+</html>

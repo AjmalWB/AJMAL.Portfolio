@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact – Ajmal Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="images/logo.webp" rel="icon" />
+  <style>
+    .contact-availability {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .avail-dot {
+      width: 10px; height: 10px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+      flex-shrink: 0;
+    }
+    .avail-text { font-size: .88rem; color: var(--gray-light); }
+    .avail-text strong { color: #22c55e; font-family: var(--font-display); }
+
+    .map-placeholder {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      color: var(--gray);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,92,26,0.1), transparent 70%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 140px 0 60px; position: relative; overflow: hidden;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Get In Touch</div>
+    <h1 class="hero-title" style="font-size: clamp(3rem,7vw,6rem); max-width: 850px;">
+      <span class="line">Let's Build</span>
+      <span class="line accent">Something</span>
+      <span class="line stroke">Exceptional</span>
+    </h1>
+    <p style="color:var(--gray-light); font-size:1.05rem; max-width:480px; margin-top:20px; animation: fadeInUp 1s 0.4s ease forwards; opacity:0;">
+      Have a project in mind? Let's talk about making it remarkable. I respond within 24 hours.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT BODY -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row g-5">
+
+      <!-- LEFT — INFO -->
+      <div class="col-lg-5 reveal-left">
+        <div class="contact-availability">
+          <div class="avail-dot"></div>
+          <div class="avail-text"><strong>Available for Projects</strong> — Currently taking new clients.</div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div style="font-size:.8rem; color:var(--gray); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">Email</div>
+            <a href="mailto:ajmal@example.com" style="color:var(--white); font-family:var(--font-display); font-weight:600;">ajmalajuz4747@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div style="font-size:.8rem; color:var(--gray); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">WhatsApp / Phone</div>
+            <a href="tel:+91XXXXXXXXXX" style="color:var(--white); font-family:var(--font-display); font-weight:600;">+91 7736829649</a>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div style="font-size:.8rem; color:var(--gray); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px;">Location</div>
+            <div style="color:var(--white); font-family:var(--font-display); font-weight:600;">palakkad, Kerala, India</div>
+          </div>
+        </div>
+
+        <div class="map-placeholder mt-4">
+          🗺️
+          <div style="position:absolute; bottom:16px; left:16px; background:rgba(10,10,10,0.85); border-radius:10px; padding:8px 16px; font-size:.78rem; font-family:var(--font-mono); color:var(--accent);">Kerala, India</div>
+        </div>
+
+        <div style="font-family:var(--font-display); font-size:.95rem; font-weight:600; margin-bottom:14px; color:var(--gray);">Connect on Social</div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+          <a href="https://github.com/AjmalWB" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+
+      <!-- RIGHT — FORM -->
+      <div class="col-lg-7 reveal-right delay-2">
+        <div class="contact-form-wrap">
+          <div class="section-tag mb-3">Send a Message</div>
+          <h2 class="section-title mb-5" style="font-size:2rem;">Start the <span class="accent">Conversation</span></h2>
+
+          <form id="contactForm" novalidate>
+            <div class="row g-4">
+              <div class="col-sm-6">
+                <div class="form-group-custom">
+                  <label class="form-label-custom">First Name</label>
+                  <input type="text" class="form-control-custom" placeholder="John" required/>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group-custom">
+                  <label class="form-label-custom">Last Name</label>
+                  <input type="text" class="form-control-custom" placeholder="Doe"/>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group-custom">
+                  <label class="form-label-custom">Email Address</label>
+                  <input type="email" class="form-control-custom" placeholder="you@example.com" required/>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group-custom">
+                  <label class="form-label-custom">Service Needed</label>
+                  <select class="form-control-custom" style="appearance:none; cursor:pointer;">
+                    <option value="" style="background:var(--bg-dark);">Select a service...</option>
+                    <option value="uiux" style="background:var(--bg-dark);">UI/UX Design</option>
+                    <option value="web" style="background:var(--bg-dark);">Web Design</option>
+                    <option value="graphic" style="background:var(--bg-dark);">Graphic Design</option>
+                    <option value="marketing" style="background:var(--bg-dark);">Digital Marketing</option>
+                    <option value="full" style="background:var(--bg-dark);">Full Package</option>
+                    <option value="other" style="background:var(--bg-dark);">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group-custom">
+                  <label class="form-label-custom">Budget Range</label>
+                  <select class="form-control-custom" style="appearance:none; cursor:pointer;">
+                    <option value="" style="background:var(--bg-dark);">Select budget...</option>
+                    <option style="background:var(--bg-dark);">$100 – $1,000</option>
+                    <option style="background:var(--bg-dark);">150 – $1,500</option>
+                    <option style="background:var(--bg-dark);">$200 – $2,000</option>
+                    <option style="background:var(--bg-dark);">$2,000+</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group-custom">
+                  <label class="form-label-custom">Your Message</label>
+                  <textarea class="form-control-custom" rows="5" placeholder="Tell me about your project, goals, and timeline..." required></textarea>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-primary-custom btn-magnetic w-100 justify-content-center" style="font-size:1rem; padding:16px;">
+                  Send Message <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="resume.html" class="footer-link">Resume</a>
+        <a href="works.html" class="footer-link">Works</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Quick Links</div>
+        <a href="works.html" class="footer-link">View Portfolio</a>
+        <a href="resume.html" class="footer-link">Download CV</a>
+        <a href="service.html" class="footer-link">Service Pricing</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Ajmal. All rights reserved.</div>
+      <div class="footer-copy" style="color: var(--accent);">Designed &amp; Developed by Ajmal ♥</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script>
+document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type="submit"]');
+  btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+  btn.style.background = '#22c55e';
+  setTimeout(() => {
+    btn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+    btn.style.background = '';
+    this.reset();
+  }, 3000);
+});
+</script>
+</body>
+</html>

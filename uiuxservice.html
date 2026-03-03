@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UI/UX Design — Ajmal</title>
+  <link href="images/logo.webp" rel="icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="gallery.css"/>
+  <style>
+    /* ---- PAGE-SPECIFIC OVERRIDES ---- */
+    /* Hero accent line */
+    .sp-hero::after {
+      content:'';
+      position:absolute; left:0; bottom:0; right:0; height:1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    /* Skill level dots */
+    .skill-dots { display:flex; gap:5px; margin-top:6px; }
+    .skill-dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.1); transition:var(--transition); }
+    .skill-dot.filled { background:var(--accent); }
+    /* Result cards */
+    .result-card {
+      background: linear-gradient(135deg, rgba(255,92,26,0.12) 0%, rgba(255,92,26,0.04) 100%);
+      border: 1px solid rgba(255,92,26,0.25);
+      border-radius: 20px; padding: 36px 30px; height:100%; text-align:center;
+      transition:var(--transition); position:relative; overflow:hidden;
+    }
+    .result-card::before {
+      content:''; position:absolute; top:-50%; left:-50%;
+      width:200%; height:200%;
+      background: radial-gradient(circle, rgba(255,92,26,0.08), transparent 60%);
+      opacity:0; transition:var(--transition);
+    }
+    .result-card:hover { transform:translateY(-6px); box-shadow:var(--glow); }
+    .result-card:hover::before { opacity:1; }
+    .rc-num { font-family:var(--font-display); font-size:3rem; font-weight:800; color:var(--accent); line-height:1; }
+    .rc-label { font-family:var(--font-mono); font-size:0.78rem; color:var(--gray-light); text-transform:uppercase; letter-spacing:.08em; margin-top:8px; }
+    /* Deliverables checklist */
+    .deliverable-item {
+      display:flex; align-items:flex-start; gap:14px; padding:20px 24px;
+      background:var(--bg-card); border:1px solid var(--border); border-radius:14px;
+      margin-bottom:12px; transition:var(--transition);
+    }
+    .deliverable-item:hover { border-color:rgba(255,92,26,0.4); transform:translateX(6px); }
+    .di-check {
+      width:28px; height:28px; background:rgba(255,92,26,0.12); border:1px solid rgba(255,92,26,0.3);
+      border-radius:8px; display:flex; align-items:center; justify-content:center;
+      color:var(--accent); font-size:0.75rem; flex-shrink:0;
+    }
+    .di-title { font-family:var(--font-display); font-size:0.95rem; font-weight:700; margin-bottom:2px; }
+    .di-sub { font-size:0.82rem; color:var(--gray); }
+    /* Marquee strip */
+    .sp-marquee { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:16px 0; overflow:hidden; background:var(--bg-card); }
+    .sp-marquee-track { display:flex; gap:60px; animation:marqueeScroll 18s linear infinite; white-space:nowrap; }
+    .sp-marquee-track:hover { animation-play-state:paused; }
+    @keyframes marqueeScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    .sp-marquee-item { display:inline-flex; align-items:center; gap:12px; font-family:var(--font-display); font-size:0.82rem; font-weight:600; color:var(--gray); text-transform:uppercase; letter-spacing:.1em; flex-shrink:0; }
+    .sp-marquee-dot { width:5px; height:5px; background:var(--accent); border-radius:50%; }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="sp-hero">
+  <div class="hero-bg-mesh"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <a href="service.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+        <div class="sp-badge"><span class="sp-badge-dot"></span> Service — 01</div>
+        <h1 class="sp-hero-title">
+          <span class="line">UI/UX</span>
+          <span class="line accent">Design</span>
+          <span class="line stroke" style="font-size: clamp(75px, 4.5vw, 90px);">That Converts</span>
+        </h1>
+        <p class="sp-hero-desc">I design digital experiences that are intuitive, beautiful, and built to drive real results — from wireframes to polished, pixel-perfect interfaces.</p>
+        <div class="sp-hero-actions">
+          <a href="contact.html" class="btn-primary-custom btn-magnetic">Start a Project <i class="fas fa-arrow-right"></i></a>
+          <a href="works.html" class="btn-outline-custom">View Work <i class="fas fa-eye"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="uiux-hero-visual parallax-target">
+          <div class="uiux-mockup-stack">
+
+            <!-- Floating card 1 — UX scores -->
+            <div class="uiux-card-float c1">
+              <div class="uf-label">User Satisfaction</div>
+              <div class="uf-bar-row">
+                <span style="font-size:.72rem; color:var(--gray-light); width:60px;">UX Score</span>
+                <div class="uf-bar-bg"><div class="uf-bar-fill" style="width:94%;"></div></div>
+                <span class="uf-bar-pct">94%</span>
+              </div>
+              <div class="uf-bar-row">
+                <span style="font-size:.72rem; color:var(--gray-light); width:60px;">Usability</span>
+                <div class="uf-bar-bg"><div class="uf-bar-fill" style="width:88%;"></div></div>
+                <span class="uf-bar-pct">88%</span>
+              </div>
+              <div class="uf-bar-row">
+                <span style="font-size:.72rem; color:var(--gray-light); width:60px;">Retention</span>
+                <div class="uf-bar-bg"><div class="uf-bar-fill" style="width:80%;"></div></div>
+                <span class="uf-bar-pct">80%</span>
+              </div>
+            </div>
+
+            <!-- Floating card 2 — team/clients -->
+            <div class="uiux-card-float c2">
+              <div class="uf-label">Happy Clients</div>
+              <div class="uf-avatar-row">
+                <div class="uf-avatar"></div>
+                <div class="uf-avatar" style="background:linear-gradient(135deg,#00c896,#6c63ff);"></div>
+                <div class="uf-avatar" style="background:linear-gradient(135deg,#febc2e,#ff5c1a);"></div>
+                <div class="uf-avatar" style="background:linear-gradient(135deg,#ff5f57,#6c63ff);"></div>
+              </div>
+              <div class="uf-status"><span>50+</span> clients worldwide</div>
+            </div>
+
+            <!-- Floating card 3 — stat -->
+            <div class="uiux-card-float c3">
+              <div class="uf-big-num">40%</div>
+              <div class="uf-big-label">Avg. Conversion Lift</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE STRIP -->
+<div class="sp-marquee">
+  <div class="sp-marquee-track">
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> UX Research</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Wireframing</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Prototyping</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> UI Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Design Systems</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Figma</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Interaction Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Mobile-First</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> UX Research</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Wireframing</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Prototyping</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> UI Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Design Systems</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Figma</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Interaction Design</span>
+    <span class="sp-marquee-item"><span class="sp-marquee-dot"></span> Mobile-First</span>
+  </div>
+</div>
+
+<!-- ===== PROCESS STEPS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-5 reveal">
+        <div class="section-tag">My Process</div>
+        <h2 class="section-title">How I Design <span class="accent">Experiences</span></h2>
+        <p class="section-subtitle">A structured, research-led approach that ensures every design decision is purposeful.</p>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <div class="uiux-step reveal delay-1">
+          <div class="uiux-step-line"></div>
+          <div class="uiux-step-icon">🔍</div>
+          <div>
+            <div class="uiux-step-num">Step 01</div>
+            <div class="uiux-step-title">Discover &amp; Research</div>
+            <div class="uiux-step-desc">User interviews, competitor analysis, heuristic audits. I understand the problem deeply before touching any design tool.</div>
+          </div>
+        </div>
+        <div class="uiux-step reveal delay-2">
+          <div class="uiux-step-line"></div>
+          <div class="uiux-step-icon">🗺️</div>
+          <div>
+            <div class="uiux-step-num">Step 02</div>
+            <div class="uiux-step-title">Define &amp; Map</div>
+            <div class="uiux-step-desc">User flows, personas, information architecture. Laying out the blueprint before building the house.</div>
+          </div>
+        </div>
+        <div class="uiux-step reveal delay-3">
+          <div class="uiux-step-line"></div>
+          <div class="uiux-step-icon">✏️</div>
+          <div>
+            <div class="uiux-step-num">Step 03</div>
+            <div class="uiux-step-title">Wireframe &amp; Iterate</div>
+            <div class="uiux-step-desc">Lo-fi to hi-fi wireframes, rapid iteration, feedback loops. Ideas made tangible before full visual design.</div>
+          </div>
+        </div>
+        <div class="uiux-step reveal delay-4">
+          <div class="uiux-step-icon">🚀</div>
+          <div>
+            <div class="uiux-step-num">Step 04</div>
+            <div class="uiux-step-title">Design &amp; Deliver</div>
+            <div class="uiux-step-desc">High-fidelity UI, design system, interactive prototype and developer handoff. Production-ready, documented, and beautiful.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal-right delay-2">
+        <!-- Deliverables list -->
+        <div class="section-tag mb-4">Deliverables</div>
+        <div class="deliverable-item">
+          <div class="di-check"><i class="fas fa-check"></i></div>
+          <div><div class="di-title">UX Audit Report</div><div class="di-sub">Heuristic evaluation with prioritised recommendations</div></div>
+        </div>
+        <div class="deliverable-item">
+          <div class="di-check"><i class="fas fa-check"></i></div>
+          <div><div class="di-title">User Flows &amp; IA</div><div class="di-sub">Complete site map and navigation architecture</div></div>
+        </div>
+        <div class="deliverable-item">
+          <div class="di-check"><i class="fas fa-check"></i></div>
+          <div><div class="di-title">Wireframes (Lo + Hi-fi)</div><div class="di-sub">All screens across mobile, tablet &amp; desktop</div></div>
+        </div>
+        <div class="deliverable-item">
+          <div class="di-check"><i class="fas fa-check"></i></div>
+          <div><div class="di-title">Interactive Prototype</div><div class="di-sub">Clickable Figma prototype for user testing</div></div>
+        </div>
+        <div class="deliverable-item">
+          <div class="di-check"><i class="fas fa-check"></i></div>
+          <div><div class="di-title">Design System</div><div class="di-sub">Components, tokens, spacing — dev-ready</div></div>
+        </div>
+        <div class="deliverable-item">
+          <div class="di-check"><i class="fas fa-check"></i></div>
+          <div><div class="di-title">Dev Handoff</div><div class="di-sub">Figma export with specs, assets &amp; annotations</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS ===== -->
+<section class="section" style="background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Results</div>
+        <h2 class="section-title">Design That <span class="accent">Delivers</span> Numbers</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-6 col-md-3 reveal delay-1">
+        <div class="result-card">
+          <div class="rc-num"><span class="count-num" data-target="40" data-suffix="%">0%</span></div>
+          <div class="rc-label">Avg. Conversion Lift</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 reveal delay-2">
+        <div class="result-card">
+          <div class="rc-num"><span class="count-num" data-target="60" data-suffix="%">0%</span></div>
+          <div class="rc-label">Bounce Rate Reduced</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 reveal delay-3">
+        <div class="result-card">
+          <div class="rc-num"><span class="count-num" data-target="3" data-suffix="x">0x</span></div>
+          <div class="rc-label">User Engagement</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 reveal delay-4">
+        <div class="result-card">
+          <div class="rc-num"><span class="count-num" data-target="30" data-suffix="+">0+</span></div>
+          <div class="rc-label">Screens Designed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOLS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-tag">Tools</div>
+        <h2 class="section-title">My Design <span class="accent">Toolkit</span></h2>
+      </div>
+    </div>
+    <div class="row g-4 mb-5">
+      <div class="col-lg-6 reveal delay-1">
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:36px;">
+          <div class="section-tag mb-4">Proficiency</div>
+          <div style="margin-bottom:18px;">
+            <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.78rem;color:var(--gray-light);margin-bottom:6px;"><span>Figma</span><span>97%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="97%"></div></div>
+          </div>
+          <div style="margin-bottom:18px;">
+            <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.78rem;color:var(--gray-light);margin-bottom:6px;"><span>Adobe XD</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
+          </div>
+          <div style="margin-bottom:18px;">
+            <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.78rem;color:var(--gray-light);margin-bottom:6px;"><span>Prototyping</span><span>93%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="93%"></div></div>
+          </div>
+          <div style="margin-bottom:0;">
+            <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.78rem;color:var(--gray-light);margin-bottom:6px;"><span>Design Systems</span><span>88%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="88%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal delay-2">
+        <div class="tool-pill-grid" style="margin-bottom:16px;">
+          <div class="tool-pill"><span class="tool-pill-icon">🎨</span> Figma</div>
+          <div class="tool-pill"><span class="tool-pill-icon">🖌️</span> Adobe XD</div>
+          <div class="tool-pill"><span class="tool-pill-icon">📐</span> Sketch</div>
+          <div class="tool-pill"><span class="tool-pill-icon">⚡</span> Framer</div>
+          <div class="tool-pill"><span class="tool-pill-icon">🔬</span> Maze (Testing)</div>
+          <div class="tool-pill"><span class="tool-pill-icon">📊</span> Hotjar</div>
+          <div class="tool-pill"><span class="tool-pill-icon">🗂️</span> Notion</div>
+          <div class="tool-pill"><span class="tool-pill-icon">✍️</span> Miro</div>
+          <div class="tool-pill"><span class="tool-pill-icon">🔗</span> Zeplin</div>
+          <div class="tool-pill"><span class="tool-pill-icon">📱</span> Principle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 mx-auto">
+        <div class="section-tag justify-content-center mb-4">FAQ</div>
+        <h2 class="section-title text-center mb-5">Common <span class="accent">Questions</span></h2>
+        <div class="faq-item reveal">
+          <div class="faq-q">Do you do UX research too, or just UI? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">I handle both. Every project starts with research — user interviews, competitive analysis, and UX audits — before any visual design begins. This ensures the interface solves real problems.</div>
+        </div>
+        <div class="faq-item reveal delay-1">
+          <div class="faq-q">What tools do you deliver files in? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">Primarily Figma, with all assets, components, and design tokens neatly organised for developer handoff. I can also deliver in Adobe XD or Sketch if required.</div>
+        </div>
+        <div class="faq-item reveal delay-2">
+          <div class="faq-q">How long does a typical UI/UX project take? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">A mobile app design (10–20 screens) typically takes 3–5 weeks. A full web platform 4–8 weeks depending on complexity. We'll agree on timelines during our kickoff call.</div>
+        </div>
+        <div class="faq-item reveal delay-3">
+          <div class="faq-q">How many revisions are included? <span class="faq-icon"><i class="fas fa-plus"></i></span></div>
+          <div class="faq-a">Starter packages include 2 revision rounds. Pro and Enterprise packages include unlimited revisions within the scope. I work until you're completely happy with the result.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-strip">
+  <div class="container reveal">
+    <div class="section-tag justify-content-center">Start Today</div>
+    <h2 class="section-title mb-4">Ready for a Better <span class="accent">User Experience?</span></h2>
+    <p style="color:var(--gray-light); max-width:420px; margin:0 auto 32px; font-size:.95rem;">Let's design something your users will love and your business will grow from.</p>
+    <a href="contact.html" class="btn-primary-custom btn-magnetic" style="font-size:1rem; padding:16px 40px;">Get a Free Consultation <i class="fas fa-arrow-right"></i></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="works.html" class="footer-link">Works</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Let's Work Together</div>
+        <p style="font-size:.9rem; color:var(--gray); margin-bottom:16px;">Have a project in mind? Let's create something exceptional.</p>
+        <a href="contact.html" class="btn-primary-custom" style="display:inline-flex; font-size:.85rem; padding:12px 24px;">Contact Me <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Ajmal. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script src="gallery.js"></script>
+<style>
+.skill-bar { background:rgba(255,255,255,0.06); height:4px; border-radius:2px; overflow:hidden; }
+.skill-bar-fill { height:100%; background:var(--accent); border-radius:2px; width:0%; transition:width 1.5s cubic-bezier(0.23,1,0.32,1); }
+</style>
+</body>
+</html>

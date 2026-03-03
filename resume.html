@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume – Ajmal Portfolio</title>
+  <link href="images/logo.webp" rel="icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex; align-items: flex-start; gap: 18px;
+      transition: var(--transition);
+      margin-bottom: 16px;
+    }
+    .cert-card:hover { border-color: rgba(255,92,26,0.4); transform: translateX(6px); }
+    .cert-icon {
+      width: 46px; height: 46px;
+      background: rgba(255,92,26,0.12);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .cert-title { font-family: var(--font-display); font-weight: 700; margin-bottom: 4px; }
+    .cert-sub { font-size: 0.82rem; color: var(--gray); }
+    .tool-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin: 6px;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+    .tool-badge:hover { border-color: var(--accent); color: var(--accent); }
+    .tool-icon { font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="page-transition"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom navbar navbar-expand-lg">
+  <div class="container">
+    <a class="nav-brand" href="index.html">Ajmal<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="nav-links navbar-nav">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="resume.html">Resume</a></li>
+        <li class="nav-item"><a href="works.html">Works</a></li>
+        <li class="nav-item"><a href="service.html">Services</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding: 140px 0 60px; position: relative; overflow: hidden;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="row align-items-end">
+      <div class="col-lg-8">
+        <div class="hero-badge"><span class="hero-badge-dot"></span> Resume</div>
+        <h1 class="hero-title" style="font-size: clamp(3rem,7vw,5.5rem);">
+          <span class="line">My</span>
+          <span class="line accent">Journey</span>
+        </h1>
+      </div>
+      <div class="col-lg-4 text-lg-end mt-4 mt-lg-0 reveal">
+        <a href="#" class="btn-primary-custom btn-magnetic">
+          <i class="fas fa-download"></i> Download CV
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME BODY -->
+<section class="section" style="padding: 30px 0;" >
+  <div class="container">
+
+    <!-- Download bar -->
+    <div class="resume-download-bar reveal">
+      <div>
+        <div style="font-family: var(--font-display); font-size:1.1rem; font-weight:700;">Ajmal's CV — 2026</div>
+        <div style="font-size:.82rem; color: var(--gray);">UI/UX · Web · Graphic Design · Video Editing · Digital Marketing</div>
+      </div>
+      <a href="#" class="btn-primary-custom" style="font-size:.85rem; padding:12px 28px;">
+        <i class="fas fa-download"></i> Download PDF
+      </a>
+    </div>
+
+    <div class="row g-5">
+      <!-- EXPERIENCE -->
+      <div class="col-lg-6">
+        <div class="reveal">
+          <div class="section-tag">Experience</div>
+          <h2 class="section-title mb-4">Work <span class="accent">History</span></h2>
+        </div>
+
+        <div class="timeline-item reveal delay-1">
+          <div class="timeline-year">2024 – Present</div>
+          <div class="timeline-title">UI/UX Designer</div>
+          <div class="timeline-sub">Freelance / Remote · Full-time</div>
+          <p style="font-size:.88rem; color:var(--gray); margin-top:10px;">Led UI/UX projects for startups and agencies worldwide. Delivered 30+ projects across web, mobile, and branding.</p>
+        </div>
+
+        <div class="timeline-item reveal delay-2">
+          <div class="timeline-year">2022 – 2024</div>
+          <div class="timeline-title">Web & Graphic Designer</div>
+          <div class="timeline-sub">CreativeHub Agency · Kerala</div>
+          <p style="font-size:.88rem; color:var(--gray); margin-top:10px;">Designed brand identities, marketing materials, and responsive websites for 20+ clients.</p>
+        </div>
+
+        <div class="timeline-item reveal delay-3">
+          <div class="timeline-year">2022 – 2024</div>
+          <div class="timeline-title">Digital Marketing Specialist</div>
+          <div class="timeline-sub">Lifeline Grop of Companies · Kochi</div>
+          <p style="font-size:.88rem; color:var(--gray); margin-top:10px;">Managed SEO, Google Ads, and social media campaigns. Grew organic traffic by 200% in 12 months.</p>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="col-lg-6">
+        <div class="reveal">
+          <div class="section-tag">Education</div>
+          <h2 class="section-title mb-4">Academic <span class="accent">Background</span></h2>
+        </div>
+
+        <div class="timeline-item reveal delay-1">
+          <div class="timeline-year">2018 – 2021</div>
+          <div class="timeline-title">BA Economics</div>
+          <div class="timeline-sub">Calicut University · Kerala</div>
+          <p style="font-size:.88rem; color:var(--gray); margin-top:10px;">Focused on Graduate</p>
+        </div>
+
+        <div class="timeline-item reveal delay-2">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-title">UIUX Design & Web Design Certificate</div>
+          <div class="timeline-sub">Coursera / Google</div>
+        </div>
+
+        <div class="timeline-item reveal delay-3">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-title">Graphic Design & Video Editing</div>
+          <div class="timeline-sub">Multi Media Designs</div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="mt-5 reveal delay-4">
+          <div class="section-tag">Certifications</div>
+          <div class="cert-card">
+            <div class="cert-icon">🎓</div>
+            <div>
+              <div class="cert-title">BA Economics</div>
+              <div class="cert-sub">Calicut Univercity· 2021</div>
+            </div>
+          </div>
+
+          <div class="cert-card">
+            <div class="cert-icon">🎓</div>
+            <div>
+              <div class="cert-title">Multi Media Advertising</div>
+              <div class="cert-sub">ICS India· 2022</div>
+            </div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">📊</div>
+            <div>
+              <div class="cert-title">UIUX, Graphic Design & Video Editing</div>
+              <div class="cert-sub">ICS India· 2022</div>
+            </div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-icon">🎨</div>
+            <div>
+              <div class="cert-title">Adobe Certified Expert</div>
+              <div class="cert-sub">ICS India· 2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="mt-5 pt-5 border-top" style="border-color: var(--border) !important;">
+      <div class="row mb-4">
+        <div class="col reveal">
+          <div class="section-tag">Tools & Technologies</div>
+          <h2 class="section-title">My <span class="accent">Toolkit</span></h2>
+        </div>
+      </div>
+      <div class="reveal delay-1">
+        <span class="tool-badge"><span class="tool-icon">🎨</span> Figma</span>
+        <span class="tool-badge"><span class="tool-icon">🖌️</span> Adobe XD</span>
+        <span class="tool-badge"><span class="tool-icon">✒️</span> Illustrator</span>
+        <span class="tool-badge"><span class="tool-icon">🖼️</span> Photoshop</span>
+        <span class="tool-badge"><span class="tool-icon">🎬</span> After Effects</span>
+        <span class="tool-badge"><span class="tool-icon">💻</span> HTML / CSS</span>
+        <span class="tool-badge"><span class="tool-icon">⚡</span> JavaScript</span>
+        <span class="tool-badge"><span class="tool-icon">📱</span> Webflow</span>
+        <span class="tool-badge"><span class="tool-icon">🔷</span> WordPress</span>
+        <span class="tool-badge"><span class="tool-icon">📊</span> Google Analytics</span>
+        <span class="tool-badge"><span class="tool-icon">🔍</span> SEMrush</span>
+        <span class="tool-badge"><span class="tool-icon">📣</span> Meta Ads</span>
+        <span class="tool-badge"><span class="tool-icon">🔎</span> Google Ads</span>
+        <span class="tool-badge"><span class="tool-icon">📧</span> Mailchimp</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">Ajmal<span>.</span></div>
+        <p class="footer-desc">UI/UX · Web · Graphic · Digital Marketing</p>
+        <div class="social-links mt-4">
+        <a href="https://www.instagram.com/ajueay/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/ajmal47/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://in.pinterest.com/Ajueayy/" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+        <a href="https://www.behance.net/ajmalaju165" class="social-link"><i class="fab fa-behance"></i></a>
+      </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Navigation</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="about.html" class="footer-link">About</a>
+        <a href="resume.html" class="footer-link">Resume</a>
+        <a href="works.html" class="footer-link">Works</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-link-title">Services</div>
+        <a href="uiuxservice.html" class="footer-link">UI/UX Design</a>
+        <a href="webservice.html" class="footer-link">Web Design</a>
+        <a href="gallery.js" class="footer-link">Graphic Design</a>
+        <a href="digitalservice.html" class="footer-link">Digital Marketing</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="footer-link-title">Get In Touch</div>
+        <p style="font-size:.9rem; color: var(--gray); margin-bottom:16px;">Let's build something great together.</p>
+        <a href="contact.html" class="btn-primary-custom" style="display:inline-flex; font-size:.85rem; padding:12px 24px;">Contact Me <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Ajmal. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
